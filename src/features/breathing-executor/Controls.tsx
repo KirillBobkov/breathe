@@ -62,7 +62,7 @@ export function Controls({
             data-variant="primary"
             onClick={onStart}
             type="button"
-            aria-label="Начать упражнение"
+            aria-label="Начать"
           >
             <svg
               className={styles.icon}

@@ -1,7 +1,7 @@
 .item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   padding: var(--spacing-md) 1.25rem;
   border-radius: var(--radius-lg);
   background-color: var(--bg-secondary);
@@ -122,8 +122,8 @@
 
 .editButton {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,8 +205,8 @@
   }
 
   .deleteButton {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
 
   .deleteButtonIcon {
@@ -219,8 +219,8 @@
   }
 
   .editButton {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
 
   .editButton svg {

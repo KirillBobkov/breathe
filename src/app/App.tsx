@@ -351,7 +351,7 @@ export const App: React.FC = () => {
                       >
                         <polygon points="5 3 19 12 5 21 5 3" />
                       </svg>
-                      Начать упражнение
+                      Начать
                     </button>
                   </div>
                 </div>
