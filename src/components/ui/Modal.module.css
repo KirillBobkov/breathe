@@ -16,8 +16,8 @@
   background-color: var(--bg-primary);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 90dvw;
+  max-height: 90dvh;
   overflow: auto;
   animation: slideUp var(--transition-slow);
 }
