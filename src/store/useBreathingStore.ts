@@ -70,6 +70,9 @@ export const useBreathingStore = create<BreathingStore>()(
       // Derived state (computed on init and kept in sync)
       activePhase: computeActivePhase(DEFAULT_PRESET.id, [DEFAULT_PRESET], 0),
       totalCycles: computeTotalCycles(DEFAULT_PRESET.id, [DEFAULT_PRESET]),
+      // Sound Settings
+      soundEnabled: true,
+      soundVolume: 0.5,
 
       // ==========================================================================
       // Preset Management Actions
@@ -382,6 +385,18 @@ export const useBreathingStore = create<BreathingStore>()(
 
       setTimeRemaining: (ms: number) => {
         set({ timeRemaining: ms }, false, 'setTimeRemaining');
+      },
+
+      // ==========================================================================
+      // Sound Settings Actions
+      // ==========================================================================
+
+      setSoundEnabled: (enabled: boolean) => {
+        set({ soundEnabled: enabled }, false, 'setSoundEnabled');
+      },
+
+      setSoundVolume: (volume: number) => {
+        set({ soundVolume: Math.max(0, Math.min(1, volume)) }, false, 'setSoundVolume');
       },
     }),
     {

@@ -5,7 +5,7 @@
   padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--radius-md);
   background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  border: none;
   transition: all var(--transition-base);
   overflow: hidden;
   min-width: 0;
@@ -73,7 +73,7 @@
 
 .input {
   padding: var(--spacing-sm);
-  border: 1px solid var(--border-color);
+  border: none;
   border-radius: var(--radius-sm);
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -116,7 +116,7 @@
 .durationInputWrapper {
   display: flex;
   align-items: center;
-  border: 1px solid var(--border-color);
+  border: none;
   border-radius: var(--radius-sm);
   background-color: var(--bg-primary);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
@@ -181,7 +181,7 @@
 
 .select {
   padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--border-color);
+  border: none;
   border-radius: var(--radius-sm);
   background-color: var(--bg-primary);
   color: var(--text-primary);

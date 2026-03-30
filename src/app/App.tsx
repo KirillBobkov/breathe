@@ -6,10 +6,12 @@ import {
   CycleProgress,
   Controls,
   CompletionSummary,
+  SoundSettings,
 } from '../features/breathing-executor';
 import { PresetList, PresetEditor } from '../features/preset-management';
 import { Card } from '../components/ui/Card';
 import { DriftCorrectedTimer } from '../shared/timer';
+import { AudioPlayer } from '../shared/audio';
 import type { Preset, PresetCreateInput } from '../entities/preset/preset.types';
 import styles from './App.module.css';
 
@@ -46,6 +48,12 @@ export const App: React.FC = () => {
   const stop = useBreathingStore((state) => state.stop);
   const nextPhase = useBreathingStore((state) => state.nextPhase);
   const setTimeRemaining = useBreathingStore((state) => state.setTimeRemaining);
+  const setSoundEnabled = useBreathingStore((state) => state.setSoundEnabled);
+  const setSoundVolume = useBreathingStore((state) => state.setSoundVolume);
+
+  // Sound settings
+  const soundEnabled = useBreathingStore((state) => state.soundEnabled);
+  const soundVolume = useBreathingStore((state) => state.soundVolume);
 
   // Local UI state
   const [isEditingPreset, setIsEditingPreset] = useState(false);
@@ -54,6 +62,8 @@ export const App: React.FC = () => {
 
   // Timer ref to persist across re-renders
   const timerRef = useRef<DriftCorrectedTimer | null>(null);
+  // Audio player ref to persist across re-renders
+  const audioPlayerRef = useRef<AudioPlayer | null>(null);
 
   // Calculate total exercise time for completion summary
   const totalExerciseTime = React.useMemo(() => {
@@ -77,6 +87,65 @@ export const App: React.FC = () => {
   // ==========================================================================
   // Timer Management
   // ==========================================================================
+
+  /**
+   * Initialize audio player on mount
+   */
+  useEffect(() => {
+    audioPlayerRef.current = new AudioPlayer({
+      volume: soundVolume,
+      enabled: soundEnabled,
+    });
+
+    return () => {
+      audioPlayerRef.current?.destroy();
+      audioPlayerRef.current = null;
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+   * Update audio player settings when sound settings change
+   */
+  useEffect(() => {
+    if (audioPlayerRef.current) {
+      audioPlayerRef.current.setEnabled(soundEnabled);
+      audioPlayerRef.current.setVolume(soundVolume);
+    }
+  }, [soundEnabled, soundVolume]);
+
+  /**
+   * Play sound when phase changes
+   */
+  useEffect(() => {
+    if (!audioPlayerRef.current || !activePhase || !isRunning || isPaused) {
+      return;
+    }
+
+    // Map phase names to sound types
+    const phaseNameLower = activePhase.name.toLowerCase();
+    let soundType: 'inhale' | 'hold' | 'exhale' | 'pause' | 'phaseChange' | 'complete' = 'phaseChange';
+
+    if (phaseNameLower.includes('вдох') || phaseNameLower.includes('inhale')) {
+      soundType = 'inhale';
+    } else if (phaseNameLower.includes('задержка') || phaseNameLower.includes('hold')) {
+      soundType = 'hold';
+    } else if (phaseNameLower.includes('выдох') || phaseNameLower.includes('exhale')) {
+      soundType = 'exhale';
+    } else if (phaseNameLower.includes('пауза') || phaseNameLower.includes('pause')) {
+      soundType = 'pause';
+    }
+
+    audioPlayerRef.current.play(soundType);
+  }, [currentPhaseIndex, activePhase, isRunning, isPaused]);
+
+  /**
+   * Play completion sound when exercise is complete
+   */
+  useEffect(() => {
+    if (appState === 'COMPLETED' && audioPlayerRef.current) {
+      audioPlayerRef.current.play('complete');
+    }
+  }, [appState]);
 
   /**
    * Initialize timer on mount
@@ -324,6 +393,13 @@ export const App: React.FC = () => {
                       </div>
                     ))}
                   </div>
+
+                  <SoundSettings
+                    soundEnabled={soundEnabled}
+                    soundVolume={soundVolume}
+                    onSoundEnabledChange={setSoundEnabled}
+                    onVolumeChange={setSoundVolume}
+                  />
 
                   <div className={styles.startButtons}>
                     <button

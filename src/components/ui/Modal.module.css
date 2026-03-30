@@ -16,8 +16,8 @@
   background-color: var(--bg-primary);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
-  max-width: 90dvw;
-  max-height: 90dvh;
+  max-width: 90vw;
+  max-height: 90vh;
   overflow: auto;
   animation: slideUp var(--transition-slow);
 }
@@ -39,7 +39,6 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-lg);
-  border-bottom: 1px solid var(--border-color);
 }
 
 .title {
@@ -101,7 +100,7 @@
 /* Mobile - 480px and below */
 @media (max-width: 480px) {
   .modal {
-    max-width: calc(100vw - 16px);
+    max-width: 100%;
     border-radius: 16px;
   }
 
@@ -117,7 +116,7 @@
 
   .modal.medium,
   .modal.large {
-    max-width: calc(100vw - 16px);
+    max-width: 100%;
   }
 
   .header {
@@ -146,7 +145,7 @@
 /* Small mobile - 360px and below */
 @media (max-width: 360px) {
   .modal {
-    max-width: calc(100vw - 12px);
+    max-width: 100%;
     border-radius: 12px;
   }
 

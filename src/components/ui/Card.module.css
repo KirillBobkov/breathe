@@ -23,12 +23,12 @@
 /* Variants */
 .default {
   background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  border: none;
 }
 
 .elevated {
   background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  border: none;
   box-shadow: var(--shadow-lg);
 }
 

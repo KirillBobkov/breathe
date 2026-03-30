@@ -32,6 +32,12 @@ interface BreathingStore {
   /** Total cycles configured for the active preset; null if no preset active */
   totalCycles: number | null;
 
+  // Sound Settings
+  /** Whether sound effects are enabled */
+  soundEnabled: boolean;
+  /** Sound volume (0.0 to 1.0) */
+  soundVolume: number;
+
   // Actions
   /** Select a preset as the active preset */
   selectPreset: (presetId: string) => void;
@@ -57,6 +63,10 @@ interface BreathingStore {
   setTimeRemaining: (ms: number) => void;
   /** Advance to the next phase in the sequence */
   nextPhase: () => void;
+  /** Enable or disable sound effects */
+  setSoundEnabled: (enabled: boolean) => void;
+  /** Set the sound volume (0.0 to 1.0) */
+  setSoundVolume: (volume: number) => void;
 }
 
 export type { BreathingStore };

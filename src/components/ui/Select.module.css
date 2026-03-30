@@ -21,7 +21,7 @@
   font-size: var(--font-size-md);
   color: var(--text-primary);
   background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  border: none;
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
   cursor: pointer;
