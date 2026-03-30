@@ -1,0 +1,67 @@
+.card {
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+/* Padding */
+.noPadding {
+  padding: 0;
+}
+
+.smallPadding {
+  padding: var(--spacing-sm);
+}
+
+.mediumPadding {
+  padding: var(--spacing-md);
+}
+
+.largePadding {
+  padding: var(--spacing-lg);
+}
+
+/* Variants */
+.default {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.elevated {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+}
+
+.elevated:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Mobile - 480px and below */
+@media (max-width: 480px) {
+  .smallPadding {
+    padding: 0.5rem;
+  }
+
+  .mediumPadding {
+    padding: 0.75rem;
+  }
+
+  .largePadding {
+    padding: 1rem;
+  }
+}
+
+/* Small mobile - 360px and below */
+@media (max-width: 360px) {
+  .smallPadding {
+    padding: 4px;
+  }
+
+  .mediumPadding {
+    padding: 0.5rem;
+  }
+
+  .largePadding {
+    padding: 0.75rem;
+  }
+}

@@ -1,0 +1,114 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  padding: 0 var(--spacing-md);
+}
+
+.title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.createButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  background-color: transparent;
+  color: var(--text-secondary);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.createButton:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: var(--bg-tertiary);
+}
+
+.createButton:active {
+  transform: scale(0.98);
+}
+
+.createButtonIcon {
+  font-size: var(--font-size-xl);
+  line-height: 1;
+}
+
+.empty {
+  text-align: center;
+  padding: var(--spacing-2xl) var(--spacing-md);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* Animation */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.items > * {
+  animation: slideIn 0.2s ease-out;
+}
+
+/* Mobile - 480px and below */
+@media (max-width: 480px) {
+  .header {
+    padding: 0 8px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .createButton {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .empty {
+    padding: 1.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Small mobile - 360px and below */
+@media (max-width: 360px) {
+  .title {
+    font-size: 1.125rem;
+  }
+
+  .createButton {
+    padding: 0.625rem;
+    font-size: 0.875rem;
+  }
+
+  .createButtonIcon {
+    font-size: 1.125rem;
+  }
+}

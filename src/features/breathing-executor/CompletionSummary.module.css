@@ -1,0 +1,223 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xl) 0;
+  animation: fadeIn 0.3s ease;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  max-width: 400px;
+  width: 100%;
+  padding: var(--spacing-2xl);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.iconWrapper {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.2) 0%, rgba(74, 222, 128, 0.05) 100%);
+  border-radius: var(--radius-full);
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  color: var(--success);
+  animation: checkmark 0.5s ease;
+}
+
+@keyframes checkmark {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  width: 100%;
+  padding: var(--spacing-md) 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.statValue {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background-color: var(--border-color);
+}
+
+.message p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-md);
+  width: 100%;
+  justify-content: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  min-height: 48px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  touch-action: manipulation;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.button[data-variant="primary"] {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+  color: white;
+  flex: 1;
+}
+
+.button[data-variant="primary"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.button[data-variant="primary"]:active {
+  transform: translateY(0);
+}
+
+.button[data-variant="secondary"] {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.button[data-variant="secondary"]:hover {
+  background-color: var(--bg-elevated);
+  border-color: var(--bg-secondary);
+}
+
+.buttonIcon {
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .summary {
+    padding: var(--spacing-lg);
+    max-width: 100%;
+    margin: 0 var(--spacing-md);
+  }
+
+  .title {
+    font-size: var(--font-size-xl);
+  }
+
+  .statValue {
+    font-size: var(--font-size-2xl);
+  }
+
+  .stats {
+    gap: var(--spacing-md);
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}
+
+/* Small mobile - 360px and below */
+@media (max-width: 360px) {
+  .summary {
+    padding: 0.75rem;
+    margin: 0 8px;
+  }
+
+  .iconWrapper {
+    width: 64px;
+    height: 64px;
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .statValue {
+    font-size: 1.75rem;
+  }
+
+  .divider {
+    height: 32px;
+  }
+
+  .button {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    min-height: 44px;
+  }
+
+  .buttonIcon {
+    width: 16px;
+    height: 16px;
+  }
+}

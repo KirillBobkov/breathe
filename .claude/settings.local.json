@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"D:/repos/breathe\" && npm install)",
+      "Bash(cd \"D:/repos/breathe\" && npm install zustand)",
+      "Bash(cd \"D:/repos/breathe\" && mkdir -p src/entities/preset src/features/preset-management src/features/breathing-executor src/components/ui src/components/layout src/shared/timer src/shared/state-machine src/shared/utils src/store src/styles tests/unit/shared/timer tests/unit/entities/preset tests/unit/features/breathing-executor)",
+      "Bash(find D:/repos/breathe -type f -name \"*.ts\" 2>/dev/null | head -20)",
+      "Bash(cd \"D:/repos/breathe\" && npx tsc --noEmit --skipLibCheck src/shared/timer/DriftCorrectedTimer.ts 2>&1 || true)",
+      "Bash(cd \"D:/repos/breathe\" && npx tsc --noEmit --skipLibCheck src/shared/timer/index.ts 2>&1 || true)",
+      "Bash(git -C D:/repos/breathe diff src/entities/preset/preset.types.ts)",
+      "Bash(cd D:/repos/breathe && npx tsc --noEmit src/entities/preset/*.ts 2>&1 || echo \"TypeScript check completed\")",
+      "Bash(cd D:/repos/breathe && npx tsc --noEmit 2>&1 | head -100)",
+      "Bash(cd D:/repos/breathe && npx tsc --noEmit 2>&1)",
+      "Bash(cat > D:/repos/breathe/src/styles/variables.css << 'EOF'\n:root {\n  /* Colors */\n  --bg-primary: #1a1a2e;\n  --bg-secondary: #16213e;\n  --bg-tertiary: #0f3460;\n  --accent: #e94560;\n  --accent-hover: #d63851;\n  --text-primary: #ffffff;\n  --text-secondary: #b8b8b8;\n  --text-muted: #6b7280;\n  --border-color: #2d3748;\n  --danger: #e94560;\n  --danger-hover: #d63851;\n  --overlay: rgba\\(0, 0, 0, 0.7\\);\n\n  /* Spacing */\n  --spacing-xs: 0.25rem;\n  --spacing-sm: 0.5rem;\n  --spacing-md: 1rem;\n  --spacing-lg: 1.5rem;\n  --spacing-xl: 2rem;\n  --spacing-2xl: 3rem;\n\n  /* Font Sizes */\n  --font-size-xs: 0.75rem;\n  --font-size-sm: 0.875rem;\n  --font-size-md: 1rem;\n  --font-size-lg: 1.125rem;\n  --font-size-xl: 1.25rem;\n  --font-size-2xl: 1.5rem;\n\n  /* Border Radius */\n  --radius-sm: 0.25rem;\n  --radius-md: 0.5rem;\n  --radius-lg: 0.75rem;\n  --radius-full: 9999px;\n\n  /* Transitions */\n  --transition-fast: 150ms ease-in-out;\n  --transition-base: 200ms ease-in-out;\n  --transition-slow: 300ms ease-in-out;\n\n  /* Shadows */\n  --shadow-sm: 0 1px 2px rgba\\(0, 0, 0, 0.3\\);\n  --shadow-md: 0 4px 6px rgba\\(0, 0, 0, 0.4\\);\n  --shadow-lg: 0 10px 15px rgba\\(0, 0, 0, 0.5\\);\n  --shadow-xl: 0 20px 25px rgba\\(0, 0, 0, 0.6\\);\n\n  /* Z-index */\n  --z-dropdown: 1000;\n  --z-modal: 1100;\n  --z-overlay: 1200;\n}\nEOF)",
+      "Bash(cd \"D:/repos/breathe\" && npm install --save-dev vitest @vitest/ui @vitest/coverage-v8 jsdom happy-dom)",
+      "Bash(cd \"D:/repos/breathe\" && npx vitest run --reporter=verbose 2>&1 | head -100)",
+      "Bash(cd \"D:/repos/breathe\" && npm uninstall vitest @vitest/ui @vitest/coverage-v8 && npm install --save-dev vitest@^1.6.0 @vitest/ui@^1.6.0 @vitest/coverage-v8@^1.6.0 2>&1 | tail -20)",
+      "Bash(cd \"D:/repos/breathe\" && npx vitest run --reporter=verbose 2>&1 | head -150)",
+      "Bash(cd \"D:/repos/breathe\" && npx vitest run --reporter=verbose 2>&1 | head -200)",
+      "Bash(cd \"D:/repos/breathe\" && npx vitest run 2>&1 | tail -30)",
+      "Bash(cd \"D:/repos/breathe\" && npx vitest run 2>&1 | grep -A5 \"FAIL\\\\|AssertionError\" | head -100)",
+      "Bash(cd \"D:/repos/breathe\" && npx vitest run 2>&1 | tail -50)",
+      "Bash(cd \"D:/repos/breathe\" && npx vitest run 2>&1 | tail -20)",
+      "Bash(cd \"D:/repos/breathe\" && npx vitest run 2>&1 | tail -15)",
+      "Bash(cd \"D:/repos/breathe\" && npm test -- --run 2>&1 | tail -30)",
+      "Bash(cd \"D:/repos/breathe\" && npm run build 2>&1)",
+      "Bash(cd \"D:/repos/breathe\" && npx tsc -b 2>&1 | head -30)",
+      "Bash(cd \"D:/repos/breathe\" && npx tsc -b 2>&1)",
+      "Bash(cd \"D:/repos/breathe\" && npm test -- --run 2>&1 | tail -20)",
+      "Bash(cd \"D:/repos/breathe\" && timeout 10 npm run dev 2>&1 || true)",
+      "Bash(cd D:/repos/breathe && npm run build 2>&1 | head -50)",
+      "Bash(cd D:/repos/breathe && npm run lint 2>&1 | head -30)",
+      "Bash(cd D:/repos/breathe && timeout 5 npm run dev 2>&1 || true)",
+      "Bash(cd D:/repos/breathe && npm run lint 2>&1 | head -50)",
+      "Bash(cd D:/repos/breathe && timeout 10 npm run dev 2>&1 || true)",
+      "Bash(cd D:/repos/breathe && npm run build 2>&1 | head -20)",
+      "Bash(sleep 3 && curl -s http://localhost:5173 | head -20)",
+      "Bash(npm run:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}
