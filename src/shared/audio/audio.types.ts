@@ -35,20 +35,21 @@ export interface SoundConfig {
 
 /**
  * Default sound configurations
+ * Simple, pleasant tones with smooth transitions
  */
 export const DEFAULT_SOUNDS: Record<BreathingPhaseSound, SoundConfig> = {
   inhale: {
     type: 'inhale',
     duration: 0.5,
-    startFreq: 300,
-    endFreq: 500,
+    startFreq: 392,
+    endFreq: 523,
     waveform: 'sine',
   },
   complete: {
     type: 'complete',
-    duration: 0.8,
-    startFreq: 400,
-    endFreq: 800,
+    duration: 0.7,
+    startFreq: 523,
+    endFreq: 659,
     waveform: 'sine',
   },
 };

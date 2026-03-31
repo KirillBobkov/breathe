@@ -55,43 +55,31 @@ export class AudioPlayer {
       const ctx = this.initAudioContext();
       const soundConfig = this.sounds[soundType];
 
-      // Resume context if suspended (common in browsers)
       if (ctx.state === 'suspended') {
         ctx.resume();
       }
 
-      // Create oscillator
-      const oscillator = ctx.createOscillator();
-      const gainNode = ctx.createGain();
+      const freqs = [soundConfig.startFreq, soundConfig.endFreq ?? soundConfig.startFreq, soundConfig.endFreq ?? soundConfig.startFreq];
+      const toneDuration = 0.15;
 
-      // Configure oscillator
-      oscillator.type = soundConfig.waveform;
-      oscillator.frequency.setValueAtTime(soundConfig.startFreq, ctx.currentTime);
+      freqs.forEach((freq, i) => {
+        const startTime = ctx.currentTime + i * toneDuration;
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
 
-      // Frequency sweep for ascending/descending sounds
-      if (soundConfig.endFreq !== undefined && soundConfig.endFreq !== soundConfig.startFreq) {
-        oscillator.frequency.linearRampToValueAtTime(
-          soundConfig.endFreq,
-          ctx.currentTime + soundConfig.duration
-        );
-      }
+        oscillator.type = soundConfig.waveform;
+        oscillator.frequency.setValueAtTime(freq, startTime);
 
-      // Configure envelope (attack and release)
-      const attackTime = 0.05;
-      const releaseTime = 0.1;
-      const sustainTime = Math.max(0, soundConfig.duration - attackTime - releaseTime);
+        gainNode.gain.setValueAtTime(0, startTime);
+        gainNode.gain.linearRampToValueAtTime(this.config.volume, startTime + 0.02);
+        gainNode.gain.linearRampToValueAtTime(0, startTime + toneDuration);
 
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(this.config.volume, ctx.currentTime + attackTime);
-      gainNode.gain.setValueAtTime(this.config.volume, ctx.currentTime + attackTime + sustainTime);
-      gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + soundConfig.duration);
+        oscillator.connect(gainNode);
+        gainNode.connect(ctx.destination);
 
-      // Connect and play
-      oscillator.connect(gainNode);
-      gainNode.connect(ctx.destination);
-
-      oscillator.start(ctx.currentTime);
-      oscillator.stop(ctx.currentTime + soundConfig.duration);
+        oscillator.start(startTime);
+        oscillator.stop(startTime + toneDuration);
+      });
     } catch (error) {
       console.warn('Failed to play sound:', error);
     }
