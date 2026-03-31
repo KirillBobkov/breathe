@@ -105,7 +105,7 @@ export const useBreathingStore = create<BreathingStore>()(
         totalCycles: computeTotalCycles(initialActivePresetId, initialPresets),
         // Sound Settings
         soundEnabled: true,
-        soundVolume: 0.5,
+        soundVolume: 0.8,
 
       // ==========================================================================
       // Preset Management Actions
