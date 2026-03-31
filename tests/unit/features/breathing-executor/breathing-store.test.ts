@@ -56,14 +56,14 @@ describe('useBreathingStore', () => {
       expect(state.activePhase).toEqual({
         id: 'p1',
         name: 'Вдох',
-        duration: 10,
+        duration: 5,
         unit: 'seconds',
       });
     });
 
     it('should have totalCycles from default preset', () => {
       const state = useBreathingStore.getState();
-      expect(state.totalCycles).toBe(4);
+      expect(state.totalCycles).toBe(7);
     });
 
     it('should start in READY state', () => {
@@ -159,7 +159,7 @@ describe('useBreathingStore', () => {
       const state = useBreathingStore.getState();
       state.selectPreset('default-4-7-8');
 
-      expect(useBreathingStore.getState().totalCycles).toBe(4);
+      expect(useBreathingStore.getState().totalCycles).toBe(7);
     });
 
     it('should warn and do nothing when preset not found', () => {
@@ -487,7 +487,7 @@ describe('useBreathingStore', () => {
       state.deletePreset(presetId);
 
       expect(useBreathingStore.getState().activePhase).toEqual(DEFAULT_PRESET.phases[0]);
-      expect(useBreathingStore.getState().totalCycles).toBe(4);
+      expect(useBreathingStore.getState().totalCycles).toBe(7);
     });
   });
 
@@ -519,8 +519,8 @@ describe('useBreathingStore', () => {
       const state = useBreathingStore.getState();
       state.start();
 
-      // Default preset first phase (Вдох) is 10 seconds = 10000ms
-      expect(useBreathingStore.getState().timeRemaining).toBe(10000);
+      // Default preset first phase (Вдох) is 5 seconds = 5000ms
+      expect(useBreathingStore.getState().timeRemaining).toBe(5000);
     });
 
     it('should set timeRemaining to first phase duration in minutes', () => {
@@ -729,11 +729,11 @@ describe('useBreathingStore', () => {
 
     it('should update timeRemaining to next phase duration', () => {
       const state = useBreathingStore.getState();
-      state.start(); // Phase 0: 10 seconds (Вдох)
+      state.start(); // Phase 0: 5 seconds (Вдох)
 
-      state.nextPhase(); // Phase 1: 60 seconds (Задержка)
+      state.nextPhase(); // Phase 1: 40 seconds (Задержка)
 
-      expect(useBreathingStore.getState().timeRemaining).toBe(60000);
+      expect(useBreathingStore.getState().timeRemaining).toBe(40000);
     });
 
     it('should update activePhase to next phase', () => {
@@ -767,7 +767,7 @@ describe('useBreathingStore', () => {
     it('should set appState to COMPLETED when cycles exhausted', () => {
       const state = useBreathingStore.getState();
       state.start();
-      useBreathingStore.setState({ currentCycle: 4, currentPhaseIndex: 3 });
+      useBreathingStore.setState({ currentCycle: 7, currentPhaseIndex: 3 });
 
       state.nextPhase();
 
@@ -777,7 +777,7 @@ describe('useBreathingStore', () => {
     it('should set isRunning to false when completed', () => {
       const state = useBreathingStore.getState();
       state.start();
-      useBreathingStore.setState({ currentCycle: 4, currentPhaseIndex: 3 });
+      useBreathingStore.setState({ currentCycle: 7, currentPhaseIndex: 3 });
 
       state.nextPhase();
 
@@ -787,7 +787,7 @@ describe('useBreathingStore', () => {
     it('should set isPaused to false when completed', () => {
       const state = useBreathingStore.getState();
       state.start();
-      useBreathingStore.setState({ currentCycle: 4, currentPhaseIndex: 3, isPaused: true });
+      useBreathingStore.setState({ currentCycle: 7, currentPhaseIndex: 3, isPaused: true });
 
       state.nextPhase();
 
@@ -797,11 +797,11 @@ describe('useBreathingStore', () => {
     it('should not increment cycle beyond totalCycles', () => {
       const state = useBreathingStore.getState();
       state.start();
-      useBreathingStore.setState({ currentCycle: 4, currentPhaseIndex: 2 });
+      useBreathingStore.setState({ currentCycle: 7, currentPhaseIndex: 2 });
 
       state.nextPhase();
 
-      expect(useBreathingStore.getState().currentCycle).toBe(4);
+      expect(useBreathingStore.getState().currentCycle).toBe(7);
     });
 
     it('should handle infinite cycles (totalCycles undefined)', () => {
@@ -984,6 +984,74 @@ describe('useBreathingStore', () => {
       expect(useBreathingStore.getState().appState).toBe('IDLE');
       expect(useBreathingStore.getState().activePhase).toBe(null);
       expect(useBreathingStore.getState().totalCycles).toBe(null);
+    });
+  });
+
+  describe('single phase with multiple cycles', () => {
+    it('should handle single phase preset with 2 cycles', () => {
+      const state = useBreathingStore.getState();
+      const presetId = state.createPreset({
+        name: 'Single Phase Two Cycles',
+        phases: [
+          { name: 'Inhale', duration: 5, unit: 'seconds' },
+        ],
+        totalCycles: 2,
+      });
+      state.selectPreset(presetId);
+      state.start();
+
+      // Initial state
+      expect(useBreathingStore.getState().currentCycle).toBe(1);
+      expect(useBreathingStore.getState().currentPhaseIndex).toBe(0);
+      expect(useBreathingStore.getState().appState).toBe('RUNNING');
+
+      // After first phase completes
+      state.nextPhase();
+
+      // Should move to cycle 2, same phase (index 0)
+      expect(useBreathingStore.getState().currentCycle).toBe(2);
+      expect(useBreathingStore.getState().currentPhaseIndex).toBe(0);
+      expect(useBreathingStore.getState().timeRemaining).toBe(5000);
+      expect(useBreathingStore.getState().appState).toBe('RUNNING');
+      expect(useBreathingStore.getState().isRunning).toBe(true);
+
+      // After second phase completes
+      state.nextPhase();
+
+      // Should complete since we've done 2 cycles
+      expect(useBreathingStore.getState().currentCycle).toBe(2);
+      expect(useBreathingStore.getState().appState).toBe('COMPLETED');
+      expect(useBreathingStore.getState().isRunning).toBe(false);
+    });
+
+    it('should handle single phase preset with 3 cycles', () => {
+      const state = useBreathingStore.getState();
+      const presetId = state.createPreset({
+        name: 'Single Phase Three Cycles',
+        phases: [
+          { name: 'Hold', duration: 3, unit: 'seconds' },
+        ],
+        totalCycles: 3,
+      });
+      state.selectPreset(presetId);
+      state.start();
+
+      // Cycle 1 -> Cycle 2
+      state.nextPhase();
+      expect(useBreathingStore.getState().currentCycle).toBe(2);
+      expect(useBreathingStore.getState().currentPhaseIndex).toBe(0);
+      expect(useBreathingStore.getState().appState).toBe('RUNNING');
+
+      // Cycle 2 -> Cycle 3
+      state.nextPhase();
+      expect(useBreathingStore.getState().currentCycle).toBe(3);
+      expect(useBreathingStore.getState().currentPhaseIndex).toBe(0);
+      expect(useBreathingStore.getState().appState).toBe('RUNNING');
+
+      // Cycle 3 -> Complete
+      state.nextPhase();
+      expect(useBreathingStore.getState().appState).toBe('COMPLETED');
+      expect(useBreathingStore.getState().isRunning).toBe(false);
     });
   });
 });

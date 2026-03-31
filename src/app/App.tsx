@@ -119,7 +119,7 @@ export const App: React.FC = () => {
     }
 
     audioPlayerRef.current.play('inhale');
-  }, [currentPhaseIndex, activePhase, isRunning, isPaused]);
+  }, [currentPhaseIndex, activePhase, isRunning, isPaused, currentCycle]);
 
   /**
    * Play completion sound when exercise is complete
