@@ -23,7 +23,7 @@
 .items {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
 }
 
 .createButton {
@@ -35,7 +35,8 @@
   padding: var(--spacing-md);
   margin-top: var(--spacing-md);
   border: 2px dashed var(--border-color);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-full);
+
   background-color: transparent;
   color: var(--text-secondary);
   font-size: var(--font-size-md);

@@ -65,18 +65,17 @@
 
 .sidebar {
   width: 30%;
-  background-color: var(--bg-secondary);
   overflow-y: auto;
   flex-shrink: 0;
   transition: transform var(--transition-base);
-  padding: 10px;
+  padding: 20px;
 }
 
 .themeToggleContainer {
   display: flex;
+  gap: var(--spacing-md);
   justify-content: flex-start;
   padding: var(--spacing-sm) 0 var(--spacing-md);
-  border-bottom: 1px solid var(--border-color);
   margin-bottom: var(--spacing-md);
 }
 
@@ -315,6 +314,7 @@
 
   .sidebar {
     position: fixed;
+      background-color: var(--bg-secondary);
     top: 0;
     left: 0;
     bottom: 0;

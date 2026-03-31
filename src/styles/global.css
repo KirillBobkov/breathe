@@ -78,7 +78,7 @@ textarea {
   width: 40px;
   height: 22px;
   border-radius: var(--radius-xl);
-  background-color: var(--border-color);
+  background-color: var(--bg-secondary);
   position: relative;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -93,7 +93,7 @@ textarea {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background-color: var(--text-primary);
+  background-color: var(--border-color);
   transition: transform 0.2s ease;
 }
 

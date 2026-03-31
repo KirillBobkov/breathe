@@ -28,6 +28,7 @@ const DEFAULT_PRESET_DATA: PresetCreateInput = {
 
 // Helper to convert Phase[] to Omit<Phase, 'id'>[]
 const toPhaseInputs = (phases: Phase[]): PresetCreateInput['phases'] => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return phases.map(({ id: _id, ...phase }) => phase);
 };
 
@@ -229,7 +230,7 @@ export const PresetEditor: React.FC<PresetEditorProps> = ({
               <Toggle
                 checked={isInfinite}
                 onChange={handleInfiniteToggle}
-                label="Бесконечно"
+                label="Без остановки"
                 ariaLabel="Бесконечный режим"
               />
             </div>

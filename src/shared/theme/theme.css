@@ -57,9 +57,9 @@
    ========================================================================== */
 :root[data-theme='light'] {
   /* Background colors - pastel creamy tones */
-  --bg-primary: #fdfbf7;
-  --bg-secondary: #f5f3ef;
-  --bg-tertiary: #ebe7e0;
+  --bg-primary: #efedea;
+  --bg-secondary: #e4e3e0;
+  --bg-tertiary: #dcd8d2;
   --bg-elevated: #ffffff;
 
   /* Text colors - soft dark gray */
@@ -72,7 +72,7 @@
   --accent-hover: #96c9a9;
 
   /* UI colors */
-  --border-color: #e5e2dc;
+  --border-color: #bab7b2;
   --danger: #d4a5a5;
   --danger-hover: #c49595;
   --success: #a8d8b9;
@@ -80,10 +80,10 @@
   --overlay: rgba(93, 90, 110, 0.3);
 
   /* Breathing phase colors - pastel tones */
-  --breathing-inhale: #c5e8f7;  /* pastel blue */
-  --breathing-hold: #f9e5c4;    /* pastel peach */
-  --breathing-exhale: #e8c5c5;  /* pastel pink */
-  --breathing-pause: #d4e8d4;   /* pastel green */
+  --breathing-inhale: #7cbbd5;  /* pastel blue */
+  --breathing-hold: #dfbd88;    /* pastel peach */
+  --breathing-exhale: #bc8d8d;  /* pastel pink */
+  --breathing-pause: #acd4ac;   /* pastel green */
 
   /* Color aliases */
   --color-primary: #a8d8b9;
