@@ -14,8 +14,7 @@
 
 .modal {
   background-color: var(--bg-primary);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xl);
+  border-radius: var(--radius-xl);
   max-width: 90vw;
   max-height: 90vh;
   overflow: auto;
@@ -54,7 +53,7 @@
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-xl);
   background-color: transparent;
   color: var(--text-secondary);
   transition: all var(--transition-fast);
@@ -101,7 +100,7 @@
 @media (max-width: 480px) {
   .modal {
     max-width: 100%;
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
   }
 
   .modal.small,
@@ -146,7 +145,7 @@
 @media (max-width: 360px) {
   .modal {
     max-width: 100%;
-    border-radius: 12px;
+    border-radius: var(--radius-xl);
   }
 
   .header {

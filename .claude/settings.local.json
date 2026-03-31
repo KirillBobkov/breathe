@@ -37,7 +37,10 @@
       "Bash(sleep 3 && curl -s http://localhost:5173 | head -20)",
       "Bash(npm run:*)",
       "Bash(npx eslint:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(cat \"C:\\\\Users\\\\73B5~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--repos-breathe\\\\7397957b-020a-47cd-a054-fb2f496008c8\\\\tasks\\\\b86ihkmb3.output\" 2>/dev/null || curl -s http://localhost:5173 -I | head -5)",
+      "Bash(pkill -f \"vite\" || true)",
+      "Bash(npm list:*)"
     ]
   }
 }

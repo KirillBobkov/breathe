@@ -1,0 +1,99 @@
+/**
+ * Theme CSS variables
+ *
+ * Dark theme is the default (applied when data-theme="dark" or not set)
+ * Light theme is applied when data-theme="light"
+ */
+
+/* ==========================================================================
+   Dark Theme (Default) - Muted palette inspired by light theme
+   ========================================================================== */
+:root,
+:root[data-theme='dark'] {
+  /* Background colors - dark warm grays (dark versions of creamy tones) */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #252525;
+  --bg-tertiary: #2f2f2f;
+  --bg-elevated: #222222;
+
+  /* Text colors - soft muted whites */
+  --text-primary: #d4d4d4;
+  --text-secondary: #a8a8a8;
+  --text-muted: #6b6b6b;
+
+  /* Accent colors - muted sage (dark version of pastel mint) */
+  --accent: #7a9e8a;
+  --accent-hover: #6a8a7a;
+
+  /* UI colors - muted tones */
+  --border-color: #3a3a3a;
+  --danger: #a87a7a;
+  --danger-hover: #986a6a;
+  --success: #7a9e8a;
+  --warning: #a89a7a;
+  --overlay: rgba(0, 0, 0, 0.7);
+
+  /* Breathing phase colors - muted desaturated tones */
+  --breathing-inhale: #7a9aa8;  /* muted blue-gray */
+  --breathing-hold: #a8987a;    /* muted warm tan */
+  --breathing-exhale: #a87a7a;  /* muted dusty rose */
+  --breathing-pause: #7aa87a;   /* muted sage */
+
+  /* Color aliases */
+  --color-primary: #7a9e8a;
+  --color-text-tertiary: #6b6b6b;
+  --color-bg-tertiary: #2f2f2f;
+
+  /* Additional UI colors */
+  --border-hover: #4a4a4a;
+  --bg-quaternary: #1e1e1e;
+  --focus: #7a9e8a;
+  --on-primary: #ffffff;
+  --primary-rgb: 122, 158, 138;
+}
+
+/* ==========================================================================
+   Light Theme (Pastel)
+   ========================================================================== */
+:root[data-theme='light'] {
+  /* Background colors - pastel creamy tones */
+  --bg-primary: #fdfbf7;
+  --bg-secondary: #f5f3ef;
+  --bg-tertiary: #ebe7e0;
+  --bg-elevated: #ffffff;
+
+  /* Text colors - soft dark gray */
+  --text-primary: #5d5a6e;
+  --text-secondary: #7a7689;
+  --text-muted: #9e9a9f;
+
+  /* Accent colors - pastel mint */
+  --accent: #a8d8b9;
+  --accent-hover: #96c9a9;
+
+  /* UI colors */
+  --border-color: #e5e2dc;
+  --danger: #d4a5a5;
+  --danger-hover: #c49595;
+  --success: #a8d8b9;
+  --warning: #e8d5a3;
+  --overlay: rgba(93, 90, 110, 0.3);
+
+  /* Breathing phase colors - pastel tones */
+  --breathing-inhale: #c5e8f7;  /* pastel blue */
+  --breathing-hold: #f9e5c4;    /* pastel peach */
+  --breathing-exhale: #e8c5c5;  /* pastel pink */
+  --breathing-pause: #d4e8d4;   /* pastel green */
+
+  /* Color aliases */
+  --color-primary: #a8d8b9;
+  --color-text-tertiary: #9e9a9f;
+  --color-bg-tertiary: #ebe7e0;
+
+  /* Additional UI colors */
+  --border-hover: #b8b5c0;
+  --bg-quaternary: #f0ede8;
+  --focus: #a8d8b9;
+  --on-primary: #ffffff;
+  --primary-rgb: 168, 216, 185;
+}

@@ -3,7 +3,7 @@
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-xl);
   background-color: var(--bg-secondary);
   border: none;
   transition: all var(--transition-base);
@@ -45,7 +45,7 @@
 .dragHandle:hover {
   color: var(--text-secondary);
   background-color: var(--bg-tertiary);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xl);
 }
 
 .dragHandle:active {
@@ -58,8 +58,8 @@
 }
 
 .dragHandleIcon {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   opacity: 0.6;
 }
 
@@ -74,7 +74,7 @@
 .input {
   padding: var(--spacing-sm);
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xl);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-size: var(--font-size-sm);
@@ -117,7 +117,7 @@
   display: flex;
   align-items: center;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xl);
   background-color: var(--bg-primary);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   overflow: hidden;
@@ -151,7 +151,7 @@
   align-items: center;
   justify-content: center;
   border: none;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -182,7 +182,7 @@
 .select {
   padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) var(--spacing-md);
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xl);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-size: var(--font-size-sm);
@@ -190,10 +190,10 @@
   cursor: pointer;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23b8b8b8' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%23b8b8b8' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right var(--spacing-sm) center;
-  padding-right: 1.5rem;
+  padding-right: 2rem;
 }
 
 .select:hover {
@@ -213,13 +213,13 @@
 
 .deleteButton {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xl);
   background-color: transparent;
   color: var(--text-muted);
   cursor: pointer;
@@ -252,8 +252,8 @@
 }
 
 .deleteButtonIcon {
-  font-size: var(--font-size-md);
-  line-height: 1;
+  width: 20px;
+  height: 20px;
 }
 
 /* Mobile - 480px and below */
@@ -269,12 +269,12 @@
   }
 
   .dragHandleIcon {
-    width: 14px;
-    height: 14px;
+    width: 24px;
+    height: 24px;
   }
 
   .inputs {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 1fr;
     gap: 6px;
   }
 
@@ -308,12 +308,13 @@
   }
 
   .deleteButton {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
   }
 
   .deleteButtonIcon {
-    font-size: 0.875rem;
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -321,7 +322,7 @@
 @media (max-width: 360px) {
   .item {
     padding: 4px;
-    border-radius: 6px;
+    border-radius: var(--radius-xl);
   }
 
   .input,
@@ -342,7 +343,7 @@
   }
 
   .dragHandleIcon {
-    width: 12px;
-    height: 12px;
+    width: 24px;
+    height: 24px;
   }
 }

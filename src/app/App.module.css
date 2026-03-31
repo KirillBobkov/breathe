@@ -34,7 +34,7 @@
   cursor: pointer;
   padding: var(--spacing-sm);
   margin-right: var(--spacing-md);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-xl);
   transition: background-color var(--transition-fast);
 }
 
@@ -72,6 +72,14 @@
   padding: 10px;
 }
 
+.themeToggleContainer {
+  display: flex;
+  justify-content: flex-start;
+  padding: var(--spacing-sm) 0 var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: var(--spacing-md);
+}
+
 /* ==========================================================================
    Main Content
    ========================================================================== */
@@ -97,6 +105,8 @@
 
 .readyContent {
   text-align: center;
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
 }
 
 .readyTitle {
@@ -217,8 +227,8 @@
 }
 
 .editButton svg {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
 }
 
 /* ==========================================================================
@@ -229,10 +239,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-md);
   width: 100%;
   max-width: 600px;
-  margin-top: var(--spacing-xl);
 }
 
 .indicators {
@@ -307,9 +316,6 @@
     padding: 0 var(--spacing-md);
   }
 
-  .exerciseContainer {
-    margin-top: var(--spacing-md);
-  }
 }
 
 @media (max-width: 360px) {
@@ -334,10 +340,6 @@
     font-size: 1rem;
   }
 
-  .exerciseContainer {
-    margin-top: 4px;
-    gap: var(--spacing-md);
-  }
 
   .readyInfoItem {
     padding: 0 8px;

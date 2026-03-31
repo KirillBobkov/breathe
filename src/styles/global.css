@@ -1,4 +1,5 @@
 @import './variables.css';
+@import '../shared/theme/theme.css';
 
 html {
   font-size: 16px;
@@ -61,4 +62,78 @@ textarea {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* Toggle Switch Component */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-checkbox {
+  appearance: none;
+  width: 40px;
+  height: 22px;
+  border-radius: var(--radius-xl);
+  background-color: var(--border-color);
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.toggle-checkbox::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: var(--text-primary);
+  transition: transform 0.2s ease;
+}
+
+.toggle-checkbox:checked {
+  background-color: var(--accent);
+}
+
+.toggle-checkbox:checked::before {
+  transform: translateX(18px);
+}
+
+.toggle-checkbox:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.toggle-checkbox:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggle-label {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+@media (max-width: 480px) {
+  .toggle-checkbox {
+    width: 36px;
+    height: 20px;
+  }
+
+  .toggle-checkbox::before {
+    width: 16px;
+    height: 16px;
+    top: 2px;
+    left: 2px;
+  }
+
+  .toggle-checkbox:checked::before {
+    transform: translateX(16px);
+  }
 }

@@ -103,7 +103,7 @@ export const PhaseEditor: React.FC<PhaseEditorProps> = ({ phases, onChange }) =>
     <div className={styles.container}>
       <div className={styles.header}>
         <h3 className={styles.title}>Фазы дыхания</h3>
-        <span className={styles.count}>{phases.length} фаза{phases.length !== 1 ? '' : ''}</span>
+        <span className={styles.count}>{phases.length} фаз{phases.length !== 1 ? '' : ''}</span>
       </div>
 
       <div className={`${styles.phaseList} ${draggedIndex !== null ? styles.phaseListDragging : ''}`}>
@@ -133,7 +133,9 @@ export const PhaseEditor: React.FC<PhaseEditorProps> = ({ phases, onChange }) =>
         className={styles.addButton}
         onClick={handleAddPhase}
       >
-        <span className={styles.addButtonIcon}>+</span>
+        <svg className={styles.addButtonIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
         Добавить фазу
       </button>
     </div>

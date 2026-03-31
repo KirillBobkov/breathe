@@ -1,10 +1,11 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-  background-color: var(--color-bg-secondary);
-  border-radius: 0.75rem;
+  border-radius: var(--radius-xl);
+  margin-bottom: 1rem;
 }
 
 .header {
@@ -18,60 +19,7 @@
   margin: 0;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-.toggle {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  min-width: 4.5rem;
-  height: 2rem;
-  background-color: var(--color-bg-tertiary);
-  border: 2px solid var(--color-border);
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  appearance: none;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--color-text-secondary);
-}
-
-.toggle:hover {
-  border-color: var(--color-border-hover);
-  background-color: var(--color-bg-quaternary);
-}
-
-.toggle:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
-}
-
-.toggle[data-enabled='true'] {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-on-primary);
-}
-
-.toggleKnob {
-  width: 1rem;
-  height: 1rem;
-  background-color: var(--color-bg-primary);
-  border-radius: 50%;
-  transition: transform 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.toggle[data-enabled='true'] .toggleKnob {
-  transform: translateX(0.5rem);
-}
-
-.toggleLabel {
-  flex: 1;
-  text-align: center;
+  color: var(--text-primary);
 }
 
 .volumeControl {
@@ -83,13 +31,13 @@
 .volumeLabel {
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
 }
 
 .volumeSlider {
   -webkit-appearance: none;
   appearance: none;
-  width: 100%;
+  width: 150px;
   height: 0.375rem;
   background-color: var(--color-bg-tertiary);
   border-radius: 9999px;
@@ -110,7 +58,7 @@
 
 .volumeSlider::-webkit-slider-thumb:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 0 4px rgba(var(--color-primary-rgb), 0.1);
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1);
 }
 
 .volumeSlider::-moz-range-thumb {
@@ -125,11 +73,11 @@
 
 .volumeSlider::-moz-range-thumb:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 0 4px rgba(var(--color-primary-rgb), 0.1);
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1);
 }
 
 .volumeSlider:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 
@@ -149,10 +97,5 @@
 
   .title {
     font-size: 0.8125rem;
-  }
-
-  .toggle {
-    min-width: 4rem;
-    height: 1.75rem;
   }
 }

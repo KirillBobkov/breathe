@@ -32,8 +32,8 @@
 }
 
 .icon {
-  width: 48px;
-  height: 48px;
+  width: 20px;
+  height: 20px;
   color: var(--success);
   animation: checkmark 0.5s ease;
 }
@@ -107,7 +107,7 @@
   min-height: 48px;
   padding: var(--spacing-md) var(--spacing-lg);
   border: none;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
@@ -194,8 +194,8 @@
   }
 
   .icon {
-    width: 36px;
-    height: 36px;
+    width: 24px;
+    height: 24px;
   }
 
   .title {
@@ -217,7 +217,7 @@
   }
 
   .buttonIcon {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
   }
 }

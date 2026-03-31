@@ -42,7 +42,7 @@
   padding: var(--spacing-sm);
   margin-top: var(--spacing-sm);
   border: 1px dashed var(--border-color);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-xl);
   background-color: transparent;
   color: var(--text-secondary);
   font-size: var(--font-size-sm);
@@ -62,15 +62,15 @@
 }
 
 .addButtonIcon {
-  font-size: var(--font-size-md);
-  line-height: 1;
+  width: 20px;
+  height: 20px;
 }
 
 /* Drop indicator */
 .dropIndicator {
   height: 4px;
   background-color: var(--accent);
-  border-radius: 2px;
+  border-radius: var(--radius-xl);
   margin: var(--spacing-xs) 0;
   animation: pulse 1s ease-in-out infinite;
 }
@@ -105,6 +105,6 @@
   }
 
   .addButtonIcon {
-    font-size: 0.875rem;
+    font-size: 1.25rem;
   }
 }

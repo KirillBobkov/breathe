@@ -48,24 +48,6 @@ export const PresetItem: React.FC<PresetItemProps> = ({
     }
   };
 
-  // Build phase summary (e.g., "Inhale → Hold → Exhale")
-  const phaseSummary = preset.phases.map((phase) => phase.name).join(' → ');
-
-  // Format cycles display
-  const getCyclesText = (cycles: number): string => {
-    const lastTwo = cycles % 100;
-    const lastOne = cycles % 10;
-    if (lastTwo >= 11 && lastTwo <= 14) return `${cycles} циклов`;
-    if (lastOne === 1) return `${cycles} цикл`;
-    if (lastOne >= 2 && lastOne <= 4) return `${cycles} цикла`;
-    return `${cycles} циклов`;
-  };
-
-  const cyclesText =
-    preset.totalCycles !== undefined
-      ? getCyclesText(preset.totalCycles)
-      : 'Бесконечно';
-
   return (
     <div
       className={`${styles.item} ${isActive ? styles.itemActive : ''}`}
@@ -83,12 +65,6 @@ export const PresetItem: React.FC<PresetItemProps> = ({
 
       <div className={styles.content}>
         <h3 className={styles.name}>{preset.name}</h3>
-        <p className={styles.phases}>
-          <span>{phaseSummary}</span>
-        </p>
-        <div className={styles.meta}>
-          <span className={styles.cycles}>{cyclesText}</span>
-        </div>
       </div>
 
 
@@ -101,8 +77,8 @@ export const PresetItem: React.FC<PresetItemProps> = ({
           title="Редактировать упражнение"
         >
           <svg
-            width="16"
-            height="16"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -123,7 +99,20 @@ export const PresetItem: React.FC<PresetItemProps> = ({
           aria-label={`Удалить упражнение ${preset.name}`}
           title="Удалить упражнение"
         >
-          <span className={styles.deleteButtonIcon}>×</span>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={styles.deleteButtonIcon}
+          >
+            <path d="M18 6L6 18" />
+            <path d="M6 6l12 12" />
+          </svg>
         </button>
       )}
     </div>

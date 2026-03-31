@@ -22,7 +22,7 @@
   color: var(--text-primary);
   background-color: var(--bg-secondary);
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-xl);
   transition: all var(--transition-fast);
   cursor: pointer;
   appearance: none;
@@ -52,8 +52,8 @@
   transform: translateY(-50%);
   pointer-events: none;
   color: var(--text-secondary);
-  width: 1rem;
-  height: 1rem;
+  width: 20px;
+  height: 20px;
 }
 
 .select option {

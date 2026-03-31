@@ -29,13 +29,13 @@
 .createButton {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--spacing-sm);
   width: 100%;
   padding: var(--spacing-md);
   margin-top: var(--spacing-md);
   border: 2px dashed var(--border-color);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   background-color: transparent;
   color: var(--text-secondary);
   font-size: var(--font-size-md);
@@ -55,8 +55,8 @@
 }
 
 .createButtonIcon {
-  font-size: var(--font-size-xl);
-  line-height: 1;
+  width: 20px;
+  height: 20px;
 }
 
 .empty {
@@ -109,6 +109,7 @@
   }
 
   .createButtonIcon {
-    font-size: 1.125rem;
+    width: 24px;
+    height: 24px;
   }
 }

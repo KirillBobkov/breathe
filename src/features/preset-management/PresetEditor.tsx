@@ -3,6 +3,7 @@ import type { Preset, PresetCreateInput, PresetUpdateInput, Phase } from '../../
 import { PhaseEditor } from './PhaseEditor';
 import { useBreathingStore } from '../../store/useBreathingStore';
 import { generateId } from '../../entities/preset/preset.model';
+import { Toggle } from '../../components/ui';
 import styles from './PresetEditor.module.css';
 
 export interface PresetEditorProps {
@@ -180,7 +181,7 @@ export const PresetEditor: React.FC<PresetEditorProps> = ({
           {/* Name Input */}
           <div className={styles.formGroup}>
             <label htmlFor="preset-name" className={styles.formGroupLabel}>
-              Название упражнения
+              Название
             </label>
             <input
               id="preset-name"
@@ -225,15 +226,12 @@ export const PresetEditor: React.FC<PresetEditorProps> = ({
                 placeholder="5"
                 disabled={isInfinite}
               />
-              <label className={styles.infiniteToggle}>
-                <input
-                  type="checkbox"
-                  className={styles.infiniteCheckbox}
-                  checked={isInfinite}
-                  onChange={handleInfiniteToggle}
-                />
-                <span className={styles.infiniteLabel}>Бесконечно</span>
-              </label>
+              <Toggle
+                checked={isInfinite}
+                onChange={handleInfiniteToggle}
+                label="Бесконечно"
+                ariaLabel="Бесконечный режим"
+              />
             </div>
           </div>
 

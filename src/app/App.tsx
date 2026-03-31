@@ -9,7 +9,7 @@ import {
   SoundSettings,
 } from '../features/breathing-executor';
 import { PresetList, PresetEditor } from '../features/preset-management';
-import { Card } from '../components/ui/Card';
+import { ThemeToggle } from '../components/ui';
 import { DriftCorrectedTimer } from '../shared/timer';
 import { AudioPlayer } from '../shared/audio';
 import type { Preset, PresetCreateInput } from '../entities/preset/preset.types';
@@ -48,11 +48,9 @@ export const App: React.FC = () => {
   const stop = useBreathingStore((state) => state.stop);
   const nextPhase = useBreathingStore((state) => state.nextPhase);
   const setTimeRemaining = useBreathingStore((state) => state.setTimeRemaining);
-  const setSoundEnabled = useBreathingStore((state) => state.setSoundEnabled);
   const setSoundVolume = useBreathingStore((state) => state.setSoundVolume);
 
   // Sound settings
-  const soundEnabled = useBreathingStore((state) => state.soundEnabled);
   const soundVolume = useBreathingStore((state) => state.soundVolume);
 
   // Local UI state
@@ -94,7 +92,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     audioPlayerRef.current = new AudioPlayer({
       volume: soundVolume,
-      enabled: soundEnabled,
+      enabled: true,
     });
 
     return () => {
@@ -108,10 +106,9 @@ export const App: React.FC = () => {
    */
   useEffect(() => {
     if (audioPlayerRef.current) {
-      audioPlayerRef.current.setEnabled(soundEnabled);
       audioPlayerRef.current.setVolume(soundVolume);
     }
-  }, [soundEnabled, soundVolume]);
+  }, [soundVolume]);
 
   /**
    * Play sound when phase changes
@@ -307,8 +304,8 @@ export const App: React.FC = () => {
           aria-expanded={isMobileMenuOpen}
         >
           <svg
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -328,6 +325,9 @@ export const App: React.FC = () => {
         <aside
           className={`${styles.sidebar} ${isMobileMenuOpen ? styles.sidebarOpen : ''}`}
         >
+          <div className={styles.themeToggleContainer}>
+            <ThemeToggle />
+          </div>
           <PresetList
             presets={presets}
             activePresetId={activePresetId ?? null}
@@ -344,8 +344,7 @@ export const App: React.FC = () => {
           {/* READY State - Show preset info with start button */}
           {appState === 'READY' && activePreset && (
             <div className={styles.readyContainer}>
-              <Card variant="elevated" padding="large">
-                <div className={styles.readyContent}>
+              <div className={styles.readyContent}>
                   <h2 className={styles.readyTitle}>{activePreset.name}</h2>
                   {activePreset.description && (
                     <p className={styles.readyDescription}>{activePreset.description}</p>
@@ -395,9 +394,7 @@ export const App: React.FC = () => {
                   </div>
 
                   <SoundSettings
-                    soundEnabled={soundEnabled}
                     soundVolume={soundVolume}
-                    onSoundEnabledChange={setSoundEnabled}
                     onVolumeChange={setSoundVolume}
                   />
 
@@ -407,7 +404,7 @@ export const App: React.FC = () => {
                       onClick={() => activePreset && handleEditPreset(activePreset)}
                       aria-label="Редактировать текущую программу"
                     >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                       </svg>
@@ -430,8 +427,7 @@ export const App: React.FC = () => {
                       Начать
                     </button>
                   </div>
-                </div>
-              </Card>
+              </div>
             </div>
           )}
 
