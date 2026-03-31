@@ -151,6 +151,7 @@ export const App: React.FC = () => {
 
   /**
    * Handle timer start when isRunning changes to true
+   * Also restarts when phase changes (including new cycles with same phase)
    */
   useEffect(() => {
     if (!timerRef.current) return;
@@ -165,7 +166,7 @@ export const App: React.FC = () => {
         timerRef.current.start(durationMs);
       }
     }
-  }, [isRunning, isPaused, activePhase]);
+  }, [isRunning, isPaused, activePhase, currentCycle]);
 
   /**
    * Handle pause/resume

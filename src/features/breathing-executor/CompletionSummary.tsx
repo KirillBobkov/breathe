@@ -45,25 +45,12 @@ export function CompletionSummary({
 
         <div className={styles.stats}>
           <div className={styles.stat}>
-            <span className={styles.statValue}>{cyclesCompleted}</span>
-            <span className={styles.statLabel}>
-              {cyclesCompleted === 1 ? 'цикл' : cyclesCompleted > 1 && cyclesCompleted < 5 ? 'цикла' : 'циклов'} завершено
-            </span>
           </div>
-
-          <div className={styles.divider} />
-
           <div className={styles.stat}>
             <span className={styles.statValue}>{formatDuration(totalTime)}</span>
             <span className={styles.statLabel}>Общее время</span>
           </div>
         </div>
-
-        <div className={styles.message}>
-          <p>Отличная работа по завершению дыхательного упражнения!</p>
-          <p>Регулярные упражнения помогают снизить стресс и улучшить концентрацию.</p>
-        </div>
-
         <div className={styles.actions}>
           <button
             className={styles.button}
@@ -82,7 +69,7 @@ export function CompletionSummary({
               <path d="M1 4v6h6" />
               <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
             </svg>
-            Начать заново
+            Заново
           </button>
 
           <button

@@ -5,12 +5,12 @@ export const DEFAULT_PRESET_ID = 'default-4-7-8';
 export const DEFAULT_PRESET: Preset = {
   id: DEFAULT_PRESET_ID,
   name: 'Задержка дыхания',
-  description: 'Успокаивающая дыхательная техника для снижения тревожности и улучшения сна',
+  description: 'Тренировка для улучшения дыхательной системы',
   phases: [
-    { id: 'p1', name: 'Вдох', duration: 10, unit: 'seconds' },
-    { id: 'p2', name: 'Задержка', duration: 50, unit: 'seconds' },
+    { id: 'p1', name: 'Вдох', duration: 5, unit: 'seconds' },
+    { id: 'p2', name: 'Задержка', duration: 40, unit: 'seconds' },
     { id: 'p3', name: 'Выдох', duration: 10, unit: 'seconds' },
-    { id: 'p4', name: 'Задержка', duration: 15, unit: 'seconds' },
+    { id: 'p4', name: 'Задержка', duration: 10, unit: 'seconds' },
   ],
   totalCycles: 7,
   createdAt: Date.now(),
