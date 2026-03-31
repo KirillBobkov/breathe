@@ -8,11 +8,11 @@ export const DEFAULT_PRESET: Preset = {
   description: 'Успокаивающая дыхательная техника для снижения тревожности и улучшения сна',
   phases: [
     { id: 'p1', name: 'Вдох', duration: 10, unit: 'seconds' },
-    { id: 'p2', name: 'Задержка', duration: 60, unit: 'seconds' },
-    { id: 'p3', name: 'Выдох', duration: 5, unit: 'seconds' },
-    { id: 'p4', name: 'Задержка', duration: 10, unit: 'seconds' },
+    { id: 'p2', name: 'Задержка', duration: 50, unit: 'seconds' },
+    { id: 'p3', name: 'Выдох', duration: 10, unit: 'seconds' },
+    { id: 'p4', name: 'Задержка', duration: 15, unit: 'seconds' },
   ],
-  totalCycles: 4,
+  totalCycles: 7,
   createdAt: Date.now(),
   updatedAt: Date.now(),
 };
