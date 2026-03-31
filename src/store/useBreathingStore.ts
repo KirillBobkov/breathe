@@ -2,13 +2,41 @@ import { devtools } from 'zustand/middleware';
 import { create } from 'zustand';
 import type { BreathingStore } from './store.types';
 import type { PresetCreateInput, PresetUpdateInput, Preset, Phase } from '../entities/preset/preset.types';
-import { DEFAULT_PRESET } from '../entities/preset/preset.constants';
+import { DEFAULT_PRESET, BUILT_IN_PRESETS } from '../entities/preset/preset.constants';
+import { initializePresetStorage, savePresets } from '../entities/preset/storage';
 
 /**
  * Helper to generate unique IDs
  */
 function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+}
+
+/**
+ * Load initial presets from storage
+ * Falls back to built-in presets if storage is unavailable
+ */
+function loadInitialPresets(): Preset[] {
+  try {
+    return initializePresetStorage();
+  } catch (error) {
+    console.error('Failed to load presets from storage, using built-ins:', error);
+    return [...BUILT_IN_PRESETS];
+  }
+}
+
+/**
+ * Get the initial active preset ID
+ * Prioritizes DEFAULT_PRESET, falls back to first available
+ */
+function getInitialActivePresetId(presets: Preset[]): string {
+  // Try to use DEFAULT_PRESET if it exists
+  const defaultPreset = presets.find((p) => p.id === DEFAULT_PRESET.id);
+  if (defaultPreset) {
+    return defaultPreset.id;
+  }
+  // Fall back to first available preset
+  return presets[0]?.id ?? DEFAULT_PRESET.id;
 }
 
 /**
@@ -48,31 +76,36 @@ function computeTotalCycles(activePresetId: string | null, presets: Preset[]): n
  * Zustand store for breathing training app
  *
  * Manages:
- * - Preset collection (CRUD operations)
+ * - Preset collection (CRUD operations with localStorage persistence)
  * - Active preset selection
  * - Runtime state for active breathing session
  * - Application state machine (IDLE, READY, RUNNING, PAUSED, COMPLETED)
  */
 export const useBreathingStore = create<BreathingStore>()(
   devtools(
-    (set, get) => ({
-      // ==========================================================================
-      // Initial State
-      // ==========================================================================
-      presets: [DEFAULT_PRESET],
-      activePresetId: DEFAULT_PRESET.id,
-      currentPhaseIndex: 0,
-      currentCycle: 1,
-      timeRemaining: 0,
-      isRunning: false,
-      isPaused: false,
-      appState: 'READY',
-      // Derived state (computed on init and kept in sync)
-      activePhase: computeActivePhase(DEFAULT_PRESET.id, [DEFAULT_PRESET], 0),
-      totalCycles: computeTotalCycles(DEFAULT_PRESET.id, [DEFAULT_PRESET]),
-      // Sound Settings
-      soundEnabled: true,
-      soundVolume: 0.5,
+    (set, get) => {
+      // Load initial presets from storage
+      const initialPresets = loadInitialPresets();
+      const initialActivePresetId = getInitialActivePresetId(initialPresets);
+
+      return {
+        // ==========================================================================
+        // Initial State
+        // ==========================================================================
+        presets: initialPresets,
+        activePresetId: initialActivePresetId,
+        currentPhaseIndex: 0,
+        currentCycle: 1,
+        timeRemaining: 0,
+        isRunning: false,
+        isPaused: false,
+        appState: 'READY',
+        // Derived state (computed on init and kept in sync)
+        activePhase: computeActivePhase(initialActivePresetId, initialPresets, 0),
+        totalCycles: computeTotalCycles(initialActivePresetId, initialPresets),
+        // Sound Settings
+        soundEnabled: true,
+        soundVolume: 0.5,
 
       // ==========================================================================
       // Preset Management Actions
@@ -121,6 +154,12 @@ export const useBreathingStore = create<BreathingStore>()(
         set(
           (state) => {
             const newPresets = [...state.presets, newPreset];
+            // Persist to localStorage
+            try {
+              savePresets(newPresets);
+            } catch (error) {
+              console.error('Failed to persist presets after create:', error);
+            }
             return {
               presets: newPresets,
             };
@@ -154,6 +193,13 @@ export const useBreathingStore = create<BreathingStore>()(
                 state.currentPhaseIndex
               );
               result.totalCycles = computeTotalCycles(state.activePresetId, updatedPresets);
+            }
+
+            // Persist to localStorage
+            try {
+              savePresets(updatedPresets);
+            } catch (error) {
+              console.error('Failed to persist presets after update:', error);
             }
 
             return result;
@@ -191,6 +237,13 @@ export const useBreathingStore = create<BreathingStore>()(
         }
 
         const newPresets = presets.filter((p) => p.id !== presetId);
+
+        // Persist to localStorage
+        try {
+          savePresets(newPresets);
+        } catch (error) {
+          console.error('Failed to persist presets after delete:', error);
+        }
 
         set(
           {
@@ -235,6 +288,13 @@ export const useBreathingStore = create<BreathingStore>()(
                 updatedPresets,
                 state.currentPhaseIndex
               );
+            }
+
+            // Persist to localStorage
+            try {
+              savePresets(updatedPresets);
+            } catch (error) {
+              console.error('Failed to persist presets after reorder:', error);
             }
 
             return result;
@@ -398,7 +458,8 @@ export const useBreathingStore = create<BreathingStore>()(
       setSoundVolume: (volume: number) => {
         set({ soundVolume: Math.max(0, Math.min(1, volume)) }, false, 'setSoundVolume');
       },
-    }),
+    };
+    },
     {
       name: 'breathing-store',
       enabled: import.meta.env.DEV,

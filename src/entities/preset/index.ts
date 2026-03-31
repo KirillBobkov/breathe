@@ -7,8 +7,6 @@ export type {
 } from './preset.types';
 export {
   DEFAULT_PRESET,
-  BOX_BREATHING_PRESET,
-  COHERENT_BREATHING_PRESET,
   BUILT_IN_PRESETS,
 } from './preset.constants';
 export {
@@ -25,3 +23,14 @@ export {
   combineValidationResults,
 } from './validation';
 export type { ValidationError, ValidationResult } from './validation';
+export {
+  loadPresets,
+  savePresets,
+  addPreset as addPresetToStorage,
+  updatePreset as updatePresetInStorage,
+  deletePreset as deletePresetFromStorage,
+  clearPresetStorage,
+  initializePresetStorage,
+  exportPresets,
+  importPresets,
+} from './storage';

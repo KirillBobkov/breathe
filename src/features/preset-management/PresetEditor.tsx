@@ -172,7 +172,7 @@ export const PresetEditor: React.FC<PresetEditorProps> = ({
         <div className={styles.header}>
           <div>
             <h2 id="preset-editor-title" className={styles.title}>
-              {preset ? 'Редактировать упражнение' : 'Создать новое упражнение'}
+              {preset ? 'Изменить' : 'Создать'}
             </h2>
           </div>
         </div>

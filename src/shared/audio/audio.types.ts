@@ -3,9 +3,9 @@
  */
 
 /**
- * Type of breathing phase for sound mapping
+ * Type of sound
  */
-export type BreathingPhaseSound = 'inhale' | 'hold' | 'exhale' | 'pause' | 'phaseChange' | 'complete';
+export type BreathingPhaseSound = 'inhale' | 'complete';
 
 /**
  * Configuration options for the audio player
@@ -18,7 +18,7 @@ export interface AudioPlayerConfig {
 }
 
 /**
- * Sound configuration for a specific breathing phase
+ * Sound configuration for a specific sound type
  */
 export interface SoundConfig {
   /** Type of sound to play */
@@ -34,7 +34,7 @@ export interface SoundConfig {
 }
 
 /**
- * Default sound configurations for each breathing phase
+ * Default sound configurations
  */
 export const DEFAULT_SOUNDS: Record<BreathingPhaseSound, SoundConfig> = {
   inhale: {
@@ -42,34 +42,6 @@ export const DEFAULT_SOUNDS: Record<BreathingPhaseSound, SoundConfig> = {
     duration: 0.5,
     startFreq: 300,
     endFreq: 500,
-    waveform: 'sine',
-  },
-  hold: {
-    type: 'hold',
-    duration: 0.3,
-    startFreq: 500,
-    endFreq: 500,
-    waveform: 'sine',
-  },
-  exhale: {
-    type: 'exhale',
-    duration: 0.5,
-    startFreq: 500,
-    endFreq: 300,
-    waveform: 'sine',
-  },
-  pause: {
-    type: 'pause',
-    duration: 0.15,
-    startFreq: 400,
-    endFreq: 400,
-    waveform: 'triangle',
-  },
-  phaseChange: {
-    type: 'phaseChange',
-    duration: 0.2,
-    startFreq: 600,
-    endFreq: 600,
     waveform: 'sine',
   },
   complete: {

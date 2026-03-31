@@ -55,8 +55,8 @@ describe('useBreathingStore', () => {
       const state = useBreathingStore.getState();
       expect(state.activePhase).toEqual({
         id: 'p1',
-        name: 'Inhale',
-        duration: 4,
+        name: 'Вдох',
+        duration: 10,
         unit: 'seconds',
       });
     });
@@ -519,8 +519,8 @@ describe('useBreathingStore', () => {
       const state = useBreathingStore.getState();
       state.start();
 
-      // Default preset first phase is 4 seconds = 4000ms
-      expect(useBreathingStore.getState().timeRemaining).toBe(4000);
+      // Default preset first phase (Вдох) is 10 seconds = 10000ms
+      expect(useBreathingStore.getState().timeRemaining).toBe(10000);
     });
 
     it('should set timeRemaining to first phase duration in minutes', () => {
@@ -702,7 +702,7 @@ describe('useBreathingStore', () => {
     it('should wrap phase index to 0 when reaching end', () => {
       const state = useBreathingStore.getState();
       state.start();
-      useBreathingStore.setState({ currentPhaseIndex: 2 }); // Last phase (0,1,2)
+      useBreathingStore.setState({ currentPhaseIndex: 3 }); // Last phase (0,1,2,3)
 
       state.nextPhase();
 
@@ -712,7 +712,7 @@ describe('useBreathingStore', () => {
     it('should increment currentCycle when wrapping to phase 0', () => {
       const state = useBreathingStore.getState();
       state.start();
-      useBreathingStore.setState({ currentPhaseIndex: 2 });
+      useBreathingStore.setState({ currentPhaseIndex: 3 });
 
       state.nextPhase();
 
@@ -729,11 +729,11 @@ describe('useBreathingStore', () => {
 
     it('should update timeRemaining to next phase duration', () => {
       const state = useBreathingStore.getState();
-      state.start(); // Phase 0: 4 seconds
+      state.start(); // Phase 0: 10 seconds (Вдох)
 
-      state.nextPhase(); // Phase 1: 7 seconds
+      state.nextPhase(); // Phase 1: 60 seconds (Задержка)
 
-      expect(useBreathingStore.getState().timeRemaining).toBe(7000);
+      expect(useBreathingStore.getState().timeRemaining).toBe(60000);
     });
 
     it('should update activePhase to next phase', () => {
@@ -767,7 +767,7 @@ describe('useBreathingStore', () => {
     it('should set appState to COMPLETED when cycles exhausted', () => {
       const state = useBreathingStore.getState();
       state.start();
-      useBreathingStore.setState({ currentCycle: 4, currentPhaseIndex: 2 });
+      useBreathingStore.setState({ currentCycle: 4, currentPhaseIndex: 3 });
 
       state.nextPhase();
 
@@ -777,7 +777,7 @@ describe('useBreathingStore', () => {
     it('should set isRunning to false when completed', () => {
       const state = useBreathingStore.getState();
       state.start();
-      useBreathingStore.setState({ currentCycle: 4, currentPhaseIndex: 2 });
+      useBreathingStore.setState({ currentCycle: 4, currentPhaseIndex: 3 });
 
       state.nextPhase();
 
@@ -787,7 +787,7 @@ describe('useBreathingStore', () => {
     it('should set isPaused to false when completed', () => {
       const state = useBreathingStore.getState();
       state.start();
-      useBreathingStore.setState({ currentCycle: 4, currentPhaseIndex: 2, isPaused: true });
+      useBreathingStore.setState({ currentCycle: 4, currentPhaseIndex: 3, isPaused: true });
 
       state.nextPhase();
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Preset } from '../../entities/preset/preset.types';
+import { DEFAULT_PRESET_ID } from '../../entities/preset/preset.constants';
 import { PresetItem } from './PresetItem';
 import styles from './PresetList.module.css';
 
@@ -14,8 +15,6 @@ export interface PresetListProps {
   onDelete: (presetId: string) => void;
   /** Callback when creating a new preset */
   onCreate: () => void;
-  /** Callback when editing a preset */
-  onEdit?: (preset: Preset) => void;
   /** IDs of built-in presets that cannot be deleted */
   builtInIds?: string[];
 }
@@ -26,8 +25,7 @@ export const PresetList: React.FC<PresetListProps> = ({
   onSelect,
   onDelete,
   onCreate,
-  onEdit,
-  builtInIds = [],
+  builtInIds = [DEFAULT_PRESET_ID],
 }) => {
   // Sort presets: built-ins first, then by name
   const sortedPresets = [...presets].sort((a, b) => {
@@ -56,7 +54,6 @@ export const PresetList: React.FC<PresetListProps> = ({
               onSelect={onSelect}
               onDelete={onDelete}
               canDelete={!builtInIds.includes(preset.id)}
-              onEdit={onEdit}
             />
           ))
         )}

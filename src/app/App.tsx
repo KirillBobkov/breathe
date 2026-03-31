@@ -118,21 +118,7 @@ export const App: React.FC = () => {
       return;
     }
 
-    // Map phase names to sound types
-    const phaseNameLower = activePhase.name.toLowerCase();
-    let soundType: 'inhale' | 'hold' | 'exhale' | 'pause' | 'phaseChange' | 'complete' = 'phaseChange';
-
-    if (phaseNameLower.includes('вдох') || phaseNameLower.includes('inhale')) {
-      soundType = 'inhale';
-    } else if (phaseNameLower.includes('задержка') || phaseNameLower.includes('hold')) {
-      soundType = 'hold';
-    } else if (phaseNameLower.includes('выдох') || phaseNameLower.includes('exhale')) {
-      soundType = 'exhale';
-    } else if (phaseNameLower.includes('пауза') || phaseNameLower.includes('pause')) {
-      soundType = 'pause';
-    }
-
-    audioPlayerRef.current.play(soundType);
+    audioPlayerRef.current.play('inhale');
   }, [currentPhaseIndex, activePhase, isRunning, isPaused]);
 
   /**
@@ -334,8 +320,7 @@ export const App: React.FC = () => {
             onSelect={handlePresetSelect}
             onDelete={handlePresetDelete}
             onCreate={handleCreatePreset}
-            onEdit={handleEditPreset}
-            builtInIds={['default-preset']}
+            builtInIds={['default-4-7-8']}
           />
         </aside>
 
@@ -408,7 +393,7 @@ export const App: React.FC = () => {
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                       </svg>
-                      Редактировать
+                      Изменить
                     </button>
                     <button
                       className={styles.startButton}

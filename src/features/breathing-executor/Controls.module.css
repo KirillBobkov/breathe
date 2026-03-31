@@ -16,8 +16,8 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-xs);
-  min-width: 80px;
-  min-height: 80px;
+  min-width: 100px;
+  min-height: 100px;
   padding: var(--spacing-md);
   background-color: var(--bg-secondary);
   border: 2px solid var(--border-color);

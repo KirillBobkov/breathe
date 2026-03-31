@@ -125,7 +125,7 @@
 .readyInfo {
   display: flex;
   justify-content: center;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-md);
   margin-bottom: var(--spacing-lg);
   padding: var(--spacing-md) 0;
 }
@@ -166,32 +166,49 @@
 }
 
 .startButton {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-xl);
-  background-color: var(--accent);
-  color: white;
-  border: none;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  min-width: 100px;
+  min-height: 100px;
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+  border: 2px solid transparent;
   border-radius: var(--radius-full);
-  font-size: var(--font-size-md);
-  font-weight: 600;
+  color: white;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  transition: all var(--transition-normal);
+  touch-action: manipulation;
 }
 
 .startButton:hover {
-  background-color: var(--accent-hover);
+  background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .startButton:active {
   transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.startButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .startButtonIcon {
   width: 20px;
   height: 20px;
+  transition: transform var(--transition-normal);
+}
+
+.startButton:hover .startButtonIcon {
+  transform: scale(1.1);
 }
 
 .startButtons {
@@ -202,33 +219,50 @@
 }
 
 .editButton {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-lg);
-  background-color: var(--bg-tertiary);
-  color: var(--text-primary);
-  border: none;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  min-width: 100px;
+  min-height: 100px;
+  padding: var(--spacing-md);
+  background-color: var(--bg-secondary);
+  border: 2px solid var(--border-color);
   border-radius: var(--radius-full);
-  font-size: var(--font-size-md);
-  font-weight: 500;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-normal);
+  touch-action: manipulation;
 }
 
 .editButton:hover {
-  background-color: var(--bg-elevated);
+  background-color: var(--bg-tertiary);
   border-color: var(--accent);
-  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .editButton:active {
   transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.editButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .editButton svg {
   width: 20px;
   height: 20px;
+  transition: transform var(--transition-normal);
+}
+
+.editButton:hover svg {
+  transform: scale(1.1);
 }
 
 /* ==========================================================================
@@ -307,7 +341,7 @@
 
   .readyInfo {
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
   }
 
   .readyInfoItem {
@@ -365,7 +399,6 @@
   }
 
   .startButtons {
-    flex-direction: column;
     width: 100%;
   }
 
