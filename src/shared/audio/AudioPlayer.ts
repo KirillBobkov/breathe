@@ -29,6 +29,21 @@ export class AudioPlayer {
   }
 
   /**
+   * Initialize/resume AudioContext after user interaction
+   * Call this on user gesture (click, tap) to ensure audio works on mobile browsers
+   */
+  init(): void {
+    try {
+      const ctx = this.initAudioContext();
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+    } catch (error) {
+      console.warn('Failed to initialize audio:', error);
+    }
+  }
+
+  /**
    * Play a sound for a specific breathing phase
    */
   play(soundType: BreathingPhaseSound): void {

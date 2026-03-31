@@ -200,6 +200,8 @@ export const App: React.FC = () => {
   // ==========================================================================
 
   const handleStart = useCallback(() => {
+    // Initialize AudioContext on user interaction (required for mobile browsers)
+    audioPlayerRef.current?.init();
     start();
   }, [start]);
 
