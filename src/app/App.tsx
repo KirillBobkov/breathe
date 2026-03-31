@@ -456,7 +456,6 @@ export const App: React.FC = () => {
           {/* COMPLETED State - Show completion summary */}
           {appState === 'COMPLETED' && (
             <CompletionSummary
-              cyclesCompleted={currentCycle - 1}
               totalTime={totalExerciseTime}
               onRestart={handleRestart}
               onClose={handleCloseSummary}

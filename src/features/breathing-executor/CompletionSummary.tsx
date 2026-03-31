@@ -2,8 +2,6 @@ import { formatDuration } from '../../shared/utils/time';
 import styles from './CompletionSummary.module.css';
 
 interface CompletionSummaryProps {
-  /** Number of cycles completed */
-  cyclesCompleted: number;
   /** Total time of the exercise in milliseconds */
   totalTime: number;
   /** Callback to restart the exercise */
@@ -17,7 +15,6 @@ interface CompletionSummaryProps {
  * Shows statistics and provides options to restart or close
  */
 export function CompletionSummary({
-  cyclesCompleted,
   totalTime,
   onRestart,
   onClose,
