@@ -54,7 +54,6 @@
 .primary:hover:not(:disabled) {
   background-color: var(--accent-hover);
   transform: scale(1.05);
-  box-shadow: var(--shadow-md);
 }
 
 .primary:active:not(:disabled) {

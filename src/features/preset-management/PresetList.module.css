@@ -32,7 +32,10 @@
   justify-content: flex-start;
   gap: var(--spacing-sm);
   width: 100%;
-  padding: var(--spacing-md);
+
+  padding: var(--spacing-sm);
+  padding-left: var(--spacing-md);
+
   margin-top: var(--spacing-md);
   border: 2px dashed var(--border-color);
   border-radius: var(--radius-full);
@@ -43,6 +46,7 @@
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   transition: all var(--transition-base);
+  min-height: 55px;
 }
 
 .createButton:hover {

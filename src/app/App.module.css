@@ -187,7 +187,6 @@
 .startButton:hover {
   background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }
 
 .startButton:active {
@@ -226,8 +225,7 @@
   min-width: 100px;
   min-height: 100px;
   padding: var(--spacing-md);
-  background-color: var(--bg-secondary);
-  border: 2px solid var(--border-color);
+  background-color: var(--bg-tertiary);
   border-radius: var(--radius-full);
   color: var(--text-primary);
   font-size: var(--font-size-sm);
@@ -241,7 +239,6 @@
   background-color: var(--bg-tertiary);
   border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }
 
 .editButton:active {
@@ -314,7 +311,7 @@
 
   .sidebar {
     position: fixed;
-      background-color: var(--bg-secondary);
+      background-color: var(--bg-primary);
     top: 0;
     left: 0;
     bottom: 0;

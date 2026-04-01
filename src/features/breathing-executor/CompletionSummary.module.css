@@ -130,12 +130,10 @@
 .button[data-variant="primary"]:hover {
   background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }
 
 .button[data-variant="primary"]:active {
   transform: translateY(0);
-  box-shadow: var(--shadow-sm);
 }
 
 .button[data-variant="secondary"] {
@@ -146,12 +144,10 @@
   background-color: rgba(233, 69, 96, 0.1);
   border-color: var(--danger);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }
 
 .button[data-variant="secondary"]:active {
   transform: translateY(0);
-  box-shadow: var(--shadow-sm);
 }
 
 .buttonIcon {

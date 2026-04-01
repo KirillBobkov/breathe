@@ -20,7 +20,6 @@
   min-height: 100px;
   padding: var(--spacing-md);
   background-color: var(--bg-secondary);
-  border: 2px solid var(--border-color);
   border-radius: var(--radius-full);
   color: var(--text-primary);
   font-size: var(--font-size-sm);
@@ -34,7 +33,6 @@
   background-color: var(--bg-tertiary);
   border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }
 
 .button:active:not(:disabled) {
@@ -55,7 +53,6 @@
 /* Primary variant (Start/Pause/Resume) */
 .button[data-variant="primary"] {
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-  border-color: transparent;
   color: white;
   min-width: 100px;
   min-height: 100px;
@@ -67,12 +64,11 @@
 
 /* Secondary variant (Stop) */
 .button[data-variant="secondary"] {
-  border-color: var(--danger);
+   background-color: rgba(233, 69, 96, 0.1);
 }
 
 .button[data-variant="secondary"]:hover:not(:disabled) {
   background-color: rgba(233, 69, 96, 0.1);
-  border-color: var(--danger);
 }
 
 .icon {

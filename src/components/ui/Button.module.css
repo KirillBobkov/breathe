@@ -43,7 +43,6 @@
 .primary:hover:not(:disabled) {
   background-color: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
 }
 
 .primary:active:not(:disabled) {
@@ -73,7 +72,6 @@
 .danger:hover:not(:disabled) {
   background-color: var(--danger-hover);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
 }
 
 .danger:active:not(:disabled) {
