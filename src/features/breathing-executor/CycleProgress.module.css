@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-md) 0;
+  width: 100%;
 }
 
 .label {

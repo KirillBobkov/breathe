@@ -6,3 +6,4 @@ export { Input, type InputProps, type InputType } from './Input';
 export { Select, type SelectProps, type SelectOption } from './Select';
 export { ThemeToggle, type ThemeToggleProps } from './ThemeToggle';
 export { Toggle } from './Toggle';
+export { CircularProgress, type CircularProgressProps } from './CircularProgress';

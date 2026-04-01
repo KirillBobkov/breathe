@@ -1,7 +1,6 @@
 .container {
   display: flex;
   justify-content: center;
-  padding: var(--spacing-md) 0;
 }
 
 .phases {
@@ -71,12 +70,12 @@
     gap: var(--spacing-xs);
   }
 
-  .phaseName {
-    display: none;
+  .phase {
+    padding: var(--spacing-xs) var(--spacing-sm);
   }
 
-  .phase[data-current="true"] .phaseName {
-    display: inline;
+  .phaseName {
+    font-size: 0.8rem;
   }
 }
 
@@ -100,7 +99,7 @@
     box-shadow: 0 0 6px var(--accent);
   }
 
-  .phase[data-current="true"] .phaseName {
+  .phaseName {
     font-size: 0.75rem;
   }
 }

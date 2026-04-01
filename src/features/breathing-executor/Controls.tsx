@@ -34,10 +34,10 @@ export function Controls({
   return (
     <div className={styles.container}>
       <div className={styles.controls} role="group" aria-label="Управление дыхательным упражнением">
-        {/* Stop button - always shown when running or paused */}
+        {/* Stop button - icon only, shown when running or paused */}
         {(isRunning || isPaused) && (
           <button
-            className={styles.button}
+            className={styles.iconButton}
             data-variant="secondary"
             onClick={onStop}
             type="button"
@@ -51,70 +51,69 @@ export function Controls({
             >
               <rect x="6" y="6" width="12" height="12" rx="2" />
             </svg>
-            <span className={styles.label}>Стоп</span>
           </button>
         )}
 
-        {/* Play button - shown when not running */}
+        {/* Primary action button - full width with accent color */}
         {showPlay && (
           <button
-            className={styles.button}
+            className={styles.primaryButton}
             data-variant="primary"
             onClick={onStart}
             type="button"
             aria-label="Начать"
           >
             <svg
-              className={styles.icon}
+              className={styles.primaryIcon}
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
             >
               <path d="M8 5v14l11-7z" />
             </svg>
-            <span className={styles.label}>Старт</span>
+            <span className={styles.primaryLabel}>Начать</span>
           </button>
         )}
 
-        {/* Pause button - shown when running */}
+        {/* Pause button - primary action when running */}
         {showPause && (
           <button
-            className={styles.button}
+            className={styles.primaryButton}
             data-variant="primary"
             onClick={onPause}
             type="button"
             aria-label="Приостановить упражнение"
           >
             <svg
-              className={styles.icon}
+              className={styles.primaryIcon}
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
             >
               <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
             </svg>
-            <span className={styles.label}>Пауза</span>
+            <span className={styles.primaryLabel}>Пауза</span>
           </button>
         )}
 
-        {/* Resume button - shown when paused */}
+        {/* Resume button - primary action when paused */}
         {showResume && (
           <button
-            className={styles.button}
+            className={styles.primaryButton}
             data-variant="primary"
             onClick={onResume}
             type="button"
             aria-label="Продолжить упражнение"
           >
             <svg
-              className={styles.icon}
+              className={styles.primaryIcon}
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
             >
               <path d="M8 5v14l11-7z" />
             </svg>
-            <span className={styles.label}>Продолжить</span>
+            <span className={styles.primaryLabel}>Продолжить</span>
           </button>
         )}
       </div>

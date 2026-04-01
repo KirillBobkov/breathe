@@ -1,17 +1,22 @@
-import styles from './CycleProgress.module.css';
+import styles from "./CycleProgress.module.css";
 
 interface CycleProgressProps {
   /** Current cycle number (1-indexed) */
   currentCycle: number;
   /** Total number of cycles; undefined means infinite */
   totalCycles?: number;
+  full? : boolean
 }
 
 /**
  * CycleProgress displays the current cycle progress
  * Shows "Cycle X / Y" or "Cycle X" with infinity symbol for infinite loops
  */
-export function CycleProgress({ currentCycle, totalCycles }: CycleProgressProps) {
+export function CycleProgress({
+  currentCycle,
+  totalCycles,
+  full = false,
+}: CycleProgressProps) {
   const isInfinite = totalCycles === undefined;
 
   const progress = isInfinite
@@ -22,14 +27,22 @@ export function CycleProgress({ currentCycle, totalCycles }: CycleProgressProps)
     <div className={styles.container}>
       <div className={styles.label}>
         {isInfinite ? (
-          <>
-            Цикл {currentCycle}
-            <span className={styles.infinity} aria-label="бесконечные циклы">
-              ∞
-            </span>
-          </>
+          full ? (
+            <>Без остановки</>
+          ) : (
+            <>
+              Цикл {currentCycle}
+              <span className={styles.infinity} aria-label="бесконечные циклы">
+                ∞
+              </span>
+            </>
+          )
+        ) : full ? (
+          <>{totalCycles} циклов</>
         ) : (
-          <>Цикл {currentCycle} / {totalCycles}</>
+          <>
+            Цикл {currentCycle} / {totalCycles}
+          </>
         )}
       </div>
       {!isInfinite && (
