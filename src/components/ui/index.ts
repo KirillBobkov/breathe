@@ -7,3 +7,8 @@ export { Select, type SelectProps, type SelectOption } from './Select';
 export { ThemeToggle, type ThemeToggleProps } from './ThemeToggle';
 export { Toggle } from './Toggle';
 export { CircularProgress, type CircularProgressProps } from './CircularProgress';
+export { Icon, type IconName, type IconProps } from './Icon';
+export { ButtonWithIcon, type ButtonWithIconProps, type ButtonWithIconVariant, type ButtonWithIconSize } from './ButtonWithIcon';
+export { NumberInput, type NumberInputProps } from './NumberInput';
+export { DeleteButton, type DeleteButtonProps } from './DeleteButton';
+export { ListGroupItem, type ListGroupItemProps } from './ListGroupItem';

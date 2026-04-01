@@ -2,6 +2,7 @@ import React from 'react';
 import type { Preset } from '../../entities/preset/preset.types';
 import { DEFAULT_PRESET_ID } from '../../entities/preset/preset.constants';
 import { PresetItem } from './PresetItem';
+import { Icon } from '../../components/ui';
 import styles from './PresetList.module.css';
 
 export interface PresetListProps {
@@ -64,9 +65,7 @@ export const PresetList: React.FC<PresetListProps> = ({
           onClick={onCreate}
           aria-label="Создать новое упражнение"
         >
-          <svg className={styles.createButtonIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 5v14M5 12h14" />
-          </svg>
+          <Icon name="plus" className={styles.createButtonIcon} />
           Создать упражнение
         </button>
       </div>

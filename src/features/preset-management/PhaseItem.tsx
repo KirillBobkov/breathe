@@ -1,5 +1,6 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback } from 'react';
 import type { Phase } from '../../entities/preset/preset.types';
+import { Icon, DeleteButton, NumberInput } from '../../components/ui';
 import styles from './PhaseItem.module.css';
 
 export interface PhaseItemProps {
@@ -51,16 +52,8 @@ export const PhaseItem: React.FC<PhaseItemProps> = ({
 }) => {
   const itemRef = useRef<HTMLDivElement>(null);
   const dragHandleRef = useRef<HTMLDivElement>(null);
-  const [isTouchDragging, setIsTouchDragging] = useState(false);
-  const [touchStartY, setTouchStartY] = useState(0);
-
-  // Локальное состояние для input - позволяет вводить пустые значения
-  const [durationInput, setDurationInput] = useState<string>(String(phase.duration));
-
-  // Синхронизация при изменении phase извне
-  useEffect(() => {
-    setDurationInput(String(phase.duration));
-  }, [phase.duration]);
+  const [isTouchDragging, setIsTouchDragging] = React.useState(false);
+  const [touchStartY, setTouchStartY] = React.useState(0);
 
   // Desktop drag handlers using React synthetic events
   const handleDragStart = useCallback((e: React.DragEvent) => {
@@ -139,35 +132,8 @@ export const PhaseItem: React.FC<PhaseItemProps> = ({
     onChange(phase.id, { name: e.target.value });
   };
 
-  // Позволяет вводить любые значения (включая пустые)
-  const handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDurationInput(e.target.value);
-  };
-
-  // При потере фокуса валидируем и сохраняем
-  const handleDurationBlur = () => {
-    const value = parseFloat(durationInput);
-    const validValue = !isNaN(value) && value >= 1 ? value : 1;
-    setDurationInput(String(validValue));
-    onChange(phase.id, { duration: validValue });
-  };
-
-  // При нажатии Enter также применяем значение
-  const handleDurationKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.currentTarget.blur();
-    }
-  };
-
-  const handleDurationIncrement = () => {
-    onChange(phase.id, { duration: phase.duration + 1 });
-  };
-
-  const handleDurationDecrement = () => {
-    const newValue = phase.duration - 1;
-    if (newValue >= 1) {
-      onChange(phase.id, { duration: newValue });
-    }
+  const handleDurationChange = (value: number) => {
+    onChange(phase.id, { duration: value });
   };
 
   const handleUnitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -208,19 +174,7 @@ export const PhaseItem: React.FC<PhaseItemProps> = ({
         onDragEnd={handleDragEnd}
         style={{ cursor: 'grab' }}
       >
-        <svg
-          className={styles.dragHandleIcon}
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="9" cy="6" r="1.5" fill="currentColor" />
-          <circle cx="9" cy="12" r="1.5" fill="currentColor" />
-          <circle cx="9" cy="18" r="1.5" fill="currentColor" />
-          <circle cx="15" cy="6" r="1.5" fill="currentColor" />
-          <circle cx="15" cy="12" r="1.5" fill="currentColor" />
-          <circle cx="15" cy="18" r="1.5" fill="currentColor" />
-        </svg>
+        <Icon name="drag-handle" className={styles.dragHandleIcon} />
       </div>
 
       {/* Inputs */}
@@ -234,35 +188,15 @@ export const PhaseItem: React.FC<PhaseItemProps> = ({
           aria-label="Название фазы"
         />
 
-        <div className={styles.durationInputWrapper}>
-          <button
-            type="button"
-            className={styles.durationButton}
-            onClick={handleDurationDecrement}
-            disabled={phase.duration <= 1}
-            aria-label="Уменьшить длительность"
-          >
-            −
-          </button>
-          <input
-            type="number"
-            className={`${styles.input} ${styles.inputDuration}`}
-            value={durationInput}
-            onChange={handleDurationChange}
-            onBlur={handleDurationBlur}
-            onKeyDown={handleDurationKeyDown}
-            step="1"
-            aria-label="Длительность фазы"
-          />
-          <button
-            type="button"
-            className={styles.durationButton}
-            onClick={handleDurationIncrement}
-            aria-label="Увеличить длительность"
-          >
-            +
-          </button>
-        </div>
+        <NumberInput
+          value={phase.duration}
+          onChange={handleDurationChange}
+          min={1}
+          max={999}
+          step={1}
+          ariaLabel="Длительность фазы"
+          className={styles.durationInputWrapper}
+        />
 
         <select
           className={styles.select}
@@ -276,30 +210,12 @@ export const PhaseItem: React.FC<PhaseItemProps> = ({
       </div>
 
       {/* Delete Button */}
-      <button
-        type="button"
-        className={`${styles.deleteButton} ${!canRemove ? styles.deleteButtonDisabled : ''}`}
-        onClick={handleRemove}
+      <DeleteButton
+        onDelete={handleRemove}
         disabled={!canRemove}
-        aria-label={`Удалить фазу ${phase.name}`}
+        ariaLabel={`Удалить фазу ${phase.name}`}
         title={canRemove ? 'Удалить фазу' : 'Нельзя удалить последнюю фазу'}
-      >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className={styles.deleteButtonIcon}
-        >
-          <path d="M3 6h18" />
-          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-        </svg>
-      </button>
+      />
     </div>
   );
 };

@@ -1,49 +1,10 @@
-.overlay {
-  position: fixed;
-  inset: 0;
-  background-color: var(--overlay);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: var(--z-modal);
-  animation: fadeIn 0.2s ease-out;
-}
-
+/* Custom modal overrides for preset editor */
 .modal {
-  width: 100%;
   max-width: 640px;
   max-height: 90dvh;
-  background-color: var(--bg-primary);
-  display: flex;
-  flex-direction: column;
-  animation: slideUp 0.25s ease-out;
-  border-radius: var(--radius-xl);
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem var(--spacing-xl);
-}
-
-.title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.subtitle {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  margin-top: var(--spacing-xs);
 }
 
 .content {
-  padding: var(--spacing-xl);
-  overflow-y: auto;
   flex: 1;
 }
 
@@ -92,33 +53,13 @@
 }
 
 .cyclesInput {
-  flex: 0 0 120px;
-  /* Скрыть дефолтные стрелочки у input type number */
-  -moz-appearance: textfield;
-}
-
-.cyclesInput::-webkit-outer-spin-button,
-.cyclesInput::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Скрыть дефолтные стрелочки у всех input type number */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
+  flex: 0 0 180px;
 }
 
 .footer {
   display: flex;
   justify-content: flex-end;
   gap: var(--spacing-md);
-  padding: 1.25rem var(--spacing-xl);
 }
 
 .button {
@@ -149,17 +90,6 @@ input[type="number"] {
   background-color: var(--accent-hover);
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
 /* Scrollbar */
 .content::-webkit-scrollbar {
   width: 8px;
@@ -180,27 +110,9 @@ input[type="number"] {
 
 /* Mobile - 480px and below */
 @media (max-width: 480px) {
-
   .modal {
     max-width: 100%;
     max-height: 100dvh;
-    height: 100dvh;
-  }
-
-  .header {
-    padding: 1rem;
-  }
-
-  .title {
-    font-size: 1.25rem;
-  }
-
-  .subtitle {
-    font-size: 0.875rem;
-  }
-
-  .content {
-    padding: 1rem;
   }
 
   .formGroup {
@@ -222,11 +134,10 @@ input[type="number"] {
   }
 
   .cyclesInput {
-    flex: 0 0 100px;
+    flex: 0 0 160px;
   }
 
   .footer {
-    padding: 1rem;
     gap: 0.5rem;
   }
 }

@@ -9,8 +9,7 @@ import {
   SoundSettings,
 } from '../features/breathing-executor';
 import { PresetList, PresetEditor } from '../features/preset-management';
-import { ThemeToggle, CircularProgress } from '../components/ui';
-import { Modal } from '../components/ui/Modal';
+import { ThemeToggle, CircularProgress, Icon, ButtonWithIcon, IconButton, Modal } from '../components/ui';
 import { DriftCorrectedTimer } from '../shared/timer';
 import { AudioPlayer } from '../shared/audio';
 import type { Preset, PresetCreateInput } from '../entities/preset/preset.types';
@@ -322,43 +321,23 @@ export const App: React.FC = () => {
     <div className={styles.app}>
       {/* Header */}
       <header className={styles.header}>
-        <button
-          className={styles.mobileMenuButton}
+        <IconButton
+          icon={<Icon name="menu" />}
+          variant="ghost"
+          size="medium"
           onClick={toggleMobileMenu}
           aria-label="Переключить меню"
-          aria-expanded={isMobileMenuOpen}
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M3 12h18" />
-            <path d="M3 6h18" />
-            <path d="M3 18h18" />
-          </svg>
-        </button>
+          className={styles.mobileMenuButton}
+        />
         <h1 className={styles.title}>Дыхательные практики</h1>
-        <button
-          className={styles.soundButton}
+        <IconButton
+          icon={<Icon name="volume" />}
+          variant="ghost"
+          size="medium"
           onClick={() => setIsSoundModalOpen(true)}
           aria-label="Настройки звука"
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M11 5L6 9H2v6h4l5 4V5z" />
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
-          </svg>
-        </button>
+          className={styles.soundButton}
+        />
       </header>
 
       {/* Main Layout */}
@@ -424,31 +403,22 @@ export const App: React.FC = () => {
 
               {/* Action Buttons */}
               <div className={styles.actionButtons}>
-                <button
-                  className={styles.iconActionButton}
+                <IconButton
+                  icon={<Icon name="edit" />}
+                  variant="secondary"
+                  size="large"
                   onClick={() => activePreset && handleEditPreset(activePreset)}
                   aria-label="Редактировать программу"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
-                  </svg>
-                </button>
-                <button
+                  className={styles.iconActionButton}
+                />
+                <ButtonWithIcon
+                  icon="play"
                   className={styles.primaryActionButton}
                   onClick={handleStart}
                   aria-label="Начать дыхательное упражнение"
                 >
-                  <svg
-                    className={styles.primaryActionIcon}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
                   Начать
-                </button>
+                </ButtonWithIcon>
               </div>
             </div>
           )}
@@ -500,13 +470,12 @@ export const App: React.FC = () => {
       </div>
 
       {/* Preset Editor Modal */}
-      {isEditingPreset && (
-        <PresetEditor
-          preset={editingPreset}
-          onSave={handleSavePreset}
-          onCancel={handleCancelEdit}
-        />
-      )}
+      <PresetEditor
+        isOpen={isEditingPreset}
+        preset={editingPreset}
+        onSave={handleSavePreset}
+        onCancel={handleCancelEdit}
+      />
 
       {/* Mobile sidebar overlay */}
       {isMobileMenuOpen && (

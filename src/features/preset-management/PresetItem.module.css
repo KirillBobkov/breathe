@@ -102,7 +102,7 @@
 }
 
 .deleteButton:hover {
-  background-color: rgba(233, 69, 96, 0.1);
+  background-color: var(--accent);
   color: var(--danger);
 }
 

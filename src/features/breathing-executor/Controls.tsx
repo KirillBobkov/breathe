@@ -1,3 +1,4 @@
+import { Icon, IconButton, ButtonWithIcon } from '../../components/ui';
 import styles from './Controls.module.css';
 
 interface ControlsProps {
@@ -36,85 +37,50 @@ export function Controls({
       <div className={styles.controls} role="group" aria-label="Управление дыхательным упражнением">
         {/* Stop button - icon only, shown when running or paused */}
         {(isRunning || isPaused) && (
-          <button
-            className={styles.iconButton}
-            data-variant="secondary"
+          <IconButton
+            icon={<Icon name="stop" />}
+            variant="secondary"
+            size="large"
             onClick={onStop}
-            type="button"
             aria-label="Остановить упражнение"
-          >
-            <svg
-              className={styles.icon}
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <rect x="6" y="6" width="12" height="12" rx="2" />
-            </svg>
-          </button>
+            className={styles.iconButton}
+          />
         )}
 
         {/* Primary action button - full width with accent color */}
         {showPlay && (
-          <button
+          <ButtonWithIcon
+            icon="play"
             className={styles.primaryButton}
-            data-variant="primary"
             onClick={onStart}
-            type="button"
             aria-label="Начать"
           >
-            <svg
-              className={styles.primaryIcon}
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M8 5v14l11-7z" />
-            </svg>
-            <span className={styles.primaryLabel}>Начать</span>
-          </button>
+            Начать
+          </ButtonWithIcon>
         )}
 
         {/* Pause button - primary action when running */}
         {showPause && (
-          <button
+          <ButtonWithIcon
+            icon="pause"
             className={styles.primaryButton}
-            data-variant="primary"
             onClick={onPause}
-            type="button"
             aria-label="Приостановить упражнение"
           >
-            <svg
-              className={styles.primaryIcon}
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-            </svg>
-            <span className={styles.primaryLabel}>Пауза</span>
-          </button>
+            Пауза
+          </ButtonWithIcon>
         )}
 
         {/* Resume button - primary action when paused */}
         {showResume && (
-          <button
+          <ButtonWithIcon
+            icon="play"
             className={styles.primaryButton}
-            data-variant="primary"
             onClick={onResume}
-            type="button"
             aria-label="Продолжить упражнение"
           >
-            <svg
-              className={styles.primaryIcon}
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M8 5v14l11-7z" />
-            </svg>
-            <span className={styles.primaryLabel}>Продолжить</span>
-          </button>
+            Продолжить
+          </ButtonWithIcon>
         )}
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Preset } from '../../entities/preset/preset.types';
+import { ListGroupItem, DeleteButton } from '../../components/ui';
 import styles from './PresetItem.module.css';
 
 export interface PresetItemProps {
@@ -22,68 +23,26 @@ export const PresetItem: React.FC<PresetItemProps> = ({
   onDelete,
   canDelete,
 }) => {
-  const handleClick = () => {
-    onSelect(preset.id);
-  };
-
-  const handleDelete = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (canDelete) {
-      onDelete(preset.id);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      onSelect(preset.id);
-    }
+  const handleDelete = () => {
+    onDelete(preset.id);
   };
 
   return (
-    <div
+    <ListGroupItem
+      isActive={isActive}
+      onClick={() => onSelect(preset.id)}
+      ariaLabel={`Выбрать упражнение ${preset.name}`}
       className={`${styles.item} ${isActive ? styles.itemActive : ''}`}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
-      aria-selected={isActive}
-      aria-label={`Выбрать упражнение ${preset.name}`}
+      actions={
+        canDelete ? (
+          <DeleteButton
+            onDelete={handleDelete}
+            ariaLabel={`Удалить упражнение ${preset.name}`}
+          />
+        ) : null
+      }
     >
-      <div
-        className={`${styles.indicator} ${isActive ? styles.indicatorActive : ''}`}
-        aria-hidden="true"
-      />
-
-      <div className={styles.content}>
-        <h3 className={styles.name}>{preset.name}</h3>
-      </div>
-
-      {canDelete && (
-        <button
-          type="button"
-          className={styles.deleteButton}
-          onClick={handleDelete}
-          aria-label={`Удалить упражнение ${preset.name}`}
-          title="Удалить упражнение"
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={styles.deleteButtonIcon}
-          >
-            <path d="M3 6h18" />
-            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-          </svg>
-        </button>
-      )}
-    </div>
+      <h3 className={styles.name}>{preset.name}</h3>
+    </ListGroupItem>
   );
 };

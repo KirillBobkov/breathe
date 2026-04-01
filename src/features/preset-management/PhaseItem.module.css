@@ -3,7 +3,7 @@
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-full);
   background-color: var(--bg-secondary);
   border: none;
   transition: all var(--transition-base);
@@ -16,16 +16,15 @@
 }
 
 .itemDragging {
-  opacity: 0.5;
+  opacity: 0.3;
   border-style: dashed;
-  transform: scale(1.02);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .itemDragOver {
   border-color: var(--accent);
   background-color: var(--bg-tertiary);
-  transform: scale(1.01);
+  transform: scale(1.00);
 }
 
 .dragHandle {
@@ -90,7 +89,7 @@
 .input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.1);
+  box-shadow: 0 0 0 2px var(--accent);
 }
 
 .inputName {
@@ -116,9 +115,9 @@
 .durationInputWrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   border: none;
   border-radius: var(--radius-xl);
-  background-color: var(--bg-primary);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   overflow: hidden;
   min-width: 0;
@@ -131,7 +130,6 @@
 
 .durationInputWrapper:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.1);
 }
 
 .durationInputWrapper .inputDuration {
@@ -203,7 +201,7 @@
 .select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.1);
+  box-shadow: 0 0 0 2px var(--accent);
 }
 
 .select option {
@@ -228,7 +226,7 @@
 }
 
 .deleteButton:hover {
-  background-color: rgba(233, 69, 96, 0.1);
+  background-color: var(--accent);
   color: var(--danger);
 }
 

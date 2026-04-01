@@ -3,7 +3,7 @@ import type { Preset, PresetCreateInput, PresetUpdateInput, Phase } from '../../
 import { PhaseEditor } from './PhaseEditor';
 import { useBreathingStore } from '../../store/useBreathingStore';
 import { generateId } from '../../entities/preset/preset.model';
-import { Toggle } from '../../components/ui';
+import { Toggle, Modal, NumberInput } from '../../components/ui';
 import styles from './PresetEditor.module.css';
 
 export interface PresetEditorProps {
@@ -13,6 +13,8 @@ export interface PresetEditorProps {
   onSave: (data: PresetCreateInput & { _id?: string }) => void;
   /** Callback when cancel is clicked */
   onCancel: () => void;
+  /** Whether the modal is open */
+  isOpen: boolean;
 }
 
 const DEFAULT_PRESET_DATA: PresetCreateInput = {
@@ -36,6 +38,7 @@ export const PresetEditor: React.FC<PresetEditorProps> = ({
   preset,
   onSave,
   onCancel,
+  isOpen,
 }) => {
   const createPreset = useBreathingStore((state) => state.createPreset);
   const updatePreset = useBreathingStore((state) => state.updatePreset);
@@ -55,11 +58,6 @@ export const PresetEditor: React.FC<PresetEditorProps> = ({
     preset?.totalCycles === undefined
   );
 
-  // Локальное состояние для input cycles
-  const [cyclesInput, setCyclesInput] = useState<string>(
-    isInfinite ? '' : String(totalCycles)
-  );
-
   // Update form when preset changes (for reuse)
   useEffect(() => {
     if (preset) {
@@ -71,37 +69,12 @@ export const PresetEditor: React.FC<PresetEditorProps> = ({
     }
   }, [preset]);
 
-  // Синхронизируем cyclesInput при изменении totalCycles или isInfinite
-  useEffect(() => {
-    setCyclesInput(isInfinite ? '' : String(totalCycles));
-  }, [totalCycles, isInfinite]);
-
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDescription(e.target.value);
-  };
-
-  // Позволяет вводить любые значения (включая пустые)
-  const handleCyclesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCyclesInput(e.target.value);
-  };
-
-  // При потере фокуса валидируем и сохраняем
-  const handleCyclesBlur = () => {
-    const value = parseInt(cyclesInput, 10);
-    const validValue = !isNaN(value) && value >= 1 ? value : 1;
-    setTotalCycles(validValue);
-    setCyclesInput(String(validValue));
-  };
-
-  // При нажатии Enter также применяем значение
-  const handleCyclesKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.currentTarget.blur();
-    }
   };
 
   const handleInfiniteToggle = () => {
@@ -153,115 +126,101 @@ export const PresetEditor: React.FC<PresetEditorProps> = ({
   }, [name, description, phases, totalCycles, isInfinite, preset, createPreset, updatePreset, onSave]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      onCancel();
-    } else if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
       handleSave();
     }
   };
 
   return (
-    <div className={styles.overlay} onClick={onCancel}>
-      <div
-        className={styles.modal}
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={handleKeyDown}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="preset-editor-title"
-      >
-        <div className={styles.header}>
-          <div>
-            <h2 id="preset-editor-title" className={styles.title}>
-              {preset ? 'Изменить' : 'Создать'}
-            </h2>
-          </div>
+    <Modal
+      isOpen={isOpen}
+      onClose={onCancel}
+      title={preset ? 'Изменить' : 'Создать'}
+      size="medium"
+      className={styles.modal}
+    >
+      <div className={styles.content} onKeyDown={handleKeyDown}>
+        {/* Name Input */}
+        <div className={styles.formGroup}>
+          <label htmlFor="preset-name" className={styles.formGroupLabel}>
+            Название
+          </label>
+          <input
+            id="preset-name"
+            type="text"
+            className={styles.formGroupInput}
+            value={name}
+            onChange={handleNameChange}
+            placeholder="например, Квадратное дыхание"
+            autoFocus
+          />
         </div>
 
-        <div className={styles.content}>
-          {/* Name Input */}
-          <div className={styles.formGroup}>
-            <label htmlFor="preset-name" className={styles.formGroupLabel}>
-              Название
-            </label>
-            <input
-              id="preset-name"
-              type="text"
-              className={styles.formGroupInput}
-              value={name}
-              onChange={handleNameChange}
-              placeholder="например, Квадратное дыхание"
-              autoFocus
+        {/* Description Input */}
+        <div className={styles.formGroup}>
+          <label htmlFor="preset-description" className={styles.formGroupLabel}>
+            Описание (необязательно)
+          </label>
+          <input
+            id="preset-description"
+            type="text"
+            className={styles.formGroupInput}
+            value={description}
+            onChange={handleDescriptionChange}
+            placeholder="например, Успокаивающая дыхательная техника"
+          />
+        </div>
+
+        {/* Cycles Input */}
+        <div className={styles.formGroup}>
+          <label htmlFor="preset-cycles" className={styles.formGroupLabel}>
+            Всего циклов
+          </label>
+          <div className={styles.cyclesRow}>
+            <NumberInput
+              value={totalCycles}
+              onChange={setTotalCycles}
+              min={1}
+              max={999}
+              step={1}
+              ariaLabel="Количество циклов"
+              className={styles.cyclesInput}
+              disabled={isInfinite}
             />
-          </div>
-
-          {/* Description Input */}
-          <div className={styles.formGroup}>
-            <label htmlFor="preset-description" className={styles.formGroupLabel}>
-              Описание (необязательно)
-            </label>
-            <input
-              id="preset-description"
-              type="text"
-              className={styles.formGroupInput}
-              value={description}
-              onChange={handleDescriptionChange}
-              placeholder="например, Успокаивающая дыхательная техника"
-            />
-          </div>
-
-          {/* Cycles Input */}
-          <div className={styles.formGroup}>
-            <label htmlFor="preset-cycles" className={styles.formGroupLabel}>
-              Всего циклов
-            </label>
-            <div className={styles.cyclesRow}>
-              <input
-                id="preset-cycles"
-                type="number"
-                className={`${styles.formGroupInput} ${styles.cyclesInput}`}
-                value={cyclesInput}
-                onChange={handleCyclesChange}
-                onBlur={handleCyclesBlur}
-                onKeyDown={handleCyclesKeyDown}
-                placeholder="5"
-                disabled={isInfinite}
-              />
-              <Toggle
-                checked={isInfinite}
-                onChange={handleInfiniteToggle}
-                label="Без остановки"
-                ariaLabel="Бесконечный режим"
-              />
-            </div>
-          </div>
-
-          {/* Phase Editor */}
-          <div className={styles.formGroup}>
-            <PhaseEditor
-              phases={phases}
-              onChange={setPhases}
+            <Toggle
+              checked={isInfinite}
+              onChange={handleInfiniteToggle}
+              label="Без остановки"
+              ariaLabel="Бесконечный режим"
             />
           </div>
         </div>
 
-        <div className={styles.footer}>
-          <button
-            type="button"
-            className={`${styles.button} ${styles.buttonCancel}`}
-            onClick={onCancel}
-          >
-            Отмена
-          </button>
-          <button
-            type="button"
-            className={`${styles.button} ${styles.buttonSave}`}
-            onClick={handleSave}
-          >
-            {preset ? 'Сохранить' : 'Создать'}
-          </button>
+        {/* Phase Editor */}
+        <div className={styles.formGroup}>
+          <PhaseEditor
+            phases={phases}
+            onChange={setPhases}
+          />
         </div>
       </div>
-    </div>
+
+      <div className={styles.footer}>
+        <button
+          type="button"
+          className={`${styles.button} ${styles.buttonCancel}`}
+          onClick={onCancel}
+        >
+          Отмена
+        </button>
+        <button
+          type="button"
+          className={`${styles.button} ${styles.buttonSave}`}
+          onClick={handleSave}
+        >
+          {preset ? 'Сохранить' : 'Создать'}
+        </button>
+      </div>
+    </Modal>
   );
 };

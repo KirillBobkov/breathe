@@ -141,7 +141,7 @@
 }
 
 .button[data-variant="secondary"]:hover {
-  background-color: rgba(233, 69, 96, 0.1);
+  background-color: var(--accent);
   border-color: var(--danger);
   transform: translateY(-2px);
 }

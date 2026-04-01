@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import type { Phase } from '../../entities/preset/preset.types';
 import { PhaseItem } from './PhaseItem';
+import { Icon } from '../../components/ui';
 import { reorder } from '../../shared/utils/drag-reorder';
 import styles from './PhaseEditor.module.css';
 
@@ -133,9 +134,7 @@ export const PhaseEditor: React.FC<PhaseEditorProps> = ({ phases, onChange }) =>
         className={styles.addButton}
         onClick={handleAddPhase}
       >
-        <svg className={styles.addButtonIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 5v14M5 12h14" />
-        </svg>
+        <Icon name="plus" className={styles.addButtonIcon} />
         Добавить фазу
       </button>
     </div>

@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-lg) 0;
 }
 
 .title {
@@ -94,6 +94,27 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ==========================================================================
+   Scrollbar
+   ========================================================================== */
+
+.modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--radius-xl);
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+  background: var(--bg-tertiary);
 }
 
 /* Mobile - 480px and below */
