@@ -14,7 +14,7 @@ export default defineConfig({
       manifest: {
         name: 'Дыхательные практики',
         short_name: 'Дыхание',
-        description: 'Приложение для дыхательных тренировок',
+        description: 'Приложение для упражнений на дыхание',
         theme_color: '#1a1a1a',
         background_color: '#1a1a1a',
         display: 'standalone',
