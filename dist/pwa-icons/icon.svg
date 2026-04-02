@@ -1,0 +1,19 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="90" fill="#1a1a2e"/>
+
+  <!-- Breathing circles animation representation -->
+  <circle cx="256" cy="256" r="60" fill="#e94560" opacity="0.9">
+    <animate attributeName="r" values="60;100;60" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.9;0.4;0.9" dur="4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Outer circle -->
+  <circle cx="256" cy="256" r="90" fill="none" stroke="#e94560" stroke-width="4" opacity="0.6">
+    <animate attributeName="r" values="90;140;90" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0.2;0.6" dur="4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Center lungs/breathing symbol -->
+  <circle cx="256" cy="256" r="30" fill="#e94560"/>
+</svg>

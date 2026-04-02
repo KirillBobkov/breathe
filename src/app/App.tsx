@@ -9,6 +9,7 @@ import {
   SoundSettings,
 } from '../features/breathing-executor';
 import { PresetList, PresetEditor } from '../features/preset-management';
+import { PwaBanner, usePWAUpdate } from '../features/pwa';
 import { ThemeToggle, CircularProgress, Icon, ButtonWithIcon, IconButton, Modal } from '../components/ui';
 import { DriftCorrectedTimer } from '../shared/timer';
 import { AudioPlayer } from '../shared/audio';
@@ -58,6 +59,20 @@ export const App: React.FC = () => {
   const [editingPreset, setEditingPreset] = useState<Preset | undefined>(undefined);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSoundModalOpen, setIsSoundModalOpen] = useState(false);
+  const [isMobileScreen, setIsMobileScreen] = useState(false);
+
+  // Detect mobile screen width for PWA banners
+  useEffect(() => {
+    const checkMobile = () => setIsMobileScreen(window.innerWidth < 480);
+    checkMobile();
+    const mediaQuery = window.matchMedia('(max-width: 479px)');
+    const handler = () => checkMobile();
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  // PWA hooks - только обновления, установка через браузер
+  const { isUpdateAvailable, isUpdating, applyUpdate, dismissUpdate } = usePWAUpdate();
 
   // Timer ref to persist across re-renders
   const timerRef = useRef<DriftCorrectedTimer | null>(null);
@@ -200,6 +215,15 @@ export const App: React.FC = () => {
   // ==========================================================================
   // Event Handlers
   // ==========================================================================
+
+  // PWA handlers
+  const handlePWAUpdate = useCallback(async () => {
+    await applyUpdate();
+  }, [applyUpdate]);
+
+  const handlePWADismissUpdate = useCallback(() => {
+    dismissUpdate();
+  }, [dismissUpdate]);
 
   const handleStart = useCallback(() => {
     // Initialize AudioContext on user interaction (required for mobile browsers)
@@ -498,6 +522,22 @@ export const App: React.FC = () => {
           onVolumeChange={setSoundVolume}
         />
       </Modal>
+
+      {/* PWA Update Available */}
+      {isUpdateAvailable && (
+        <PwaBanner
+          icon="restart"
+          title="Доступно обновление"
+          description="Новая версия приложения готова к установке"
+          primaryText="Обновить"
+          dismissText="Позже"
+          onPrimary={handlePWAUpdate}
+          onDismiss={handlePWADismissUpdate}
+          position="top"
+          fullWidth={isMobileScreen}
+          isLoading={isUpdating}
+        />
+      )}
     </div>
   );
 };

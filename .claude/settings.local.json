@@ -42,7 +42,20 @@
       "Bash(pkill -f \"vite\" || true)",
       "Bash(npm list:*)",
       "Bash(cd D:/repos/breathe && npm install zod)",
-      "Bash(npm test:*)"
+      "Bash(npm test:*)",
+      "WebSearch",
+      "Bash(npm install:*)",
+      "Bash(where magick:*)",
+      "Bash(magick --version 2>/dev/null || magick -version 2>/dev/null || echo \"ImageMagick not installed\")",
+      "Bash(node -p \"require\\('canvas'\\)\" 2>/dev/null || echo \"canvas not available\")",
+      "Bash(node -p \"require\\('sharp/package.json'\\).version\" 2>/dev/null || echo \"sharp not installed\")",
+      "Bash(node scripts/generate-icons.js)",
+      "Bash(VITE_SW_ENABLED=true npm run preview)",
+      "Bash(curl -s -I \"http://localhost:5173\" 2>/dev/null | head -5 || echo \"Dev server not running\")",
+      "Bash(curl -s \"http://localhost:5173/manifest.webmanifest\" 2>/dev/null | head -c 500 || echo \"Manifest not available on dev server\")",
+      "Bash(curl -s \"http://localhost:5173/sw.js\" 2>/dev/null | head -c 200 || echo \"SW not available on dev server\")",
+      "Bash(curl -s \"http://localhost:5173/manifest.webmanifest\" 2>/dev/null | python3 -m json.tool 2>/dev/null | head -30 || echo \"Manifest not valid JSON or not available\")",
+      "Bash(identify \"D:/repos/breathe/public/pwa-icons/icon-192x192.png\" \"D:/repos/breathe/public/pwa-icons/icon-512x512.png\" 2>/dev/null || echo \"ImageMagick not available\")"
     ]
   }
 }
