@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './CircularProgress.module.css';
 
-export type PhaseType = 'inhale' | 'hold' | 'exhale' | 'pause' | 'pause-after-exhale' | null;
-
 export interface CircularProgressProps {
   progress?: number;
   size?: number;
@@ -10,8 +8,7 @@ export interface CircularProgressProps {
   color?: string;
   showGlow?: boolean;
   animate?: boolean;
-  phase?: PhaseType;
-  phaseIndex?: number; // Used to alternate animations
+  phaseIndex?: number; // Used to restart animations on phase change
   children?: React.ReactNode;
   ariaLabel?: string;
 }
@@ -33,21 +30,6 @@ export function CircularProgress({
   const effectiveCircumference = circumference - strokeWidth;
   const dashArray = effectiveCircumference;
   const dashOffset = effectiveCircumference * (1 - progress);
-
-  // Determine animation type based on phase index (alternating pattern)
-  // 0=expand, 1=hold, 2=contract, 3=hold, then repeat
-  const getAnimationPhase = (index: number): PhaseType => {
-    const pattern = index % 4;
-    switch (pattern) {
-      case 0: return 'inhale';     // expand
-      case 1: return 'hold';       // subtle pulse
-      case 2: return 'exhale';     // contract
-      case 3: return 'pause';      // subtle pulse
-      default: return null;
-    }
-  };
-
-  const animationPhase = getAnimationPhase(phaseIndex);
 
   const glowCircle = showGlow ? (
     <circle
@@ -91,15 +73,22 @@ export function CircularProgress({
     </>
   ) : null;
 
-  // Inner wave - collapses inward on contract phases
-  const innerWave = animate && animationPhase === 'exhale' ? (
-    <circle
-      className={styles.innerWave}
-      cx={center}
-      cy={center}
-      r={radius}
-      stroke={color}
-    />
+  // Static pulsing circles around main circle (idle state)
+  const idlePulseCircles = !animate ? (
+    <>
+      <circle
+        className={`${styles.idlePulseCircle} ${styles.idlePulse1}`}
+        cx={center}
+        cy={center}
+        r={radius}
+      />
+      <circle
+        className={`${styles.idlePulseCircle} ${styles.idlePulse3}`}
+        cx={center}
+        cy={center}
+        r={radius}
+      />
+    </>
   ) : null;
 
   const centerContent = children ? (
@@ -121,7 +110,6 @@ export function CircularProgress({
         className={styles.circleWrapper}
         style={circleWrapperStyle}
         data-animate={animate}
-        data-phase={animationPhase}
       >
         <svg
           className={styles.svg}
@@ -133,7 +121,7 @@ export function CircularProgress({
         >
           {/* Waves rendered first (behind) */}
           {waves}
-          {innerWave}
+          {idlePulseCircles}
 
           {/* Background circle */}
           <circle

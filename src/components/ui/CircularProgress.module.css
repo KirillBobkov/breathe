@@ -121,125 +121,79 @@
 
 /* ========== BREATHING EXPAND/CONTRACT ========== */
 
-/* Inhale - expand outward */
-@keyframes breatheIn {
+/* Same animation for all phases - expand outward */
+@keyframes breatheExpand {
   0%, 100% {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.40);
+    transform: scale(1.20);
   }
 }
 
-/* Exhale - contract inward */
-@keyframes breatheOut {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.85);
-  }
+/* All phases use same animation, only color differs */
+.circleWrapper[data-animate="true"] .circleProgress {
+  animation: breatheExpand 8s ease-in-out infinite;
 }
 
-/* Hold - subtle pulse */
-@keyframes breatheHold {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.03);
-  }
+.circleWrapper[data-animate="true"] .circleGlow {
+  animation: breatheExpand 8s ease-in-out infinite;
 }
 
-/* Pause - very subtle */
-@keyframes breathePause {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-}
-
-/* Phase-specific animations */
-.circleWrapper[data-animate="true"][data-phase="inhale"] .circleProgress {
-  animation: breatheIn 8s ease-in-out infinite;
-}
-
-.circleWrapper[data-animate="true"][data-phase="inhale"] .circleGlow {
-  animation: breatheIn 8s ease-in-out infinite;
-}
-
-.circleWrapper[data-animate="true"][data-phase="inhale"] .circleBackground {
-  animation: breatheIn 8s ease-in-out infinite;
-}
-
-.circleWrapper[data-animate="true"][data-phase="exhale"] .circleProgress {
-  animation: breatheOut 8s ease-in-out infinite;
-}
-
-.circleWrapper[data-animate="true"][data-phase="exhale"] .circleGlow {
-  animation: breatheOut 8s ease-in-out infinite;
-}
-
-.circleWrapper[data-animate="true"][data-phase="exhale"] .circleBackground {
-  animation: breatheOut 8s ease-in-out infinite;
-}
-
-.circleWrapper[data-animate="true"][data-phase="hold"] .circleProgress {
-  animation: breatheHold 6s ease-in-out infinite;
-}
-
-.circleWrapper[data-animate="true"][data-phase="hold"] .circleGlow {
-  animation: breatheHold 6s ease-in-out infinite;
-}
-
-.circleWrapper[data-animate="true"][data-phase="hold"] .circleBackground {
-  animation: breatheHold 6s ease-in-out infinite;
-}
-
-.circleWrapper[data-animate="true"][data-phase="pause-after-exhale"] .circleProgress,
-.circleWrapper[data-animate="true"][data-phase="pause"] .circleProgress {
-  animation: breathePause 5s ease-in-out infinite;
-}
-
-.circleWrapper[data-animate="true"][data-phase="pause-after-exhale"] .circleGlow,
-.circleWrapper[data-animate="true"][data-phase="pause"] .circleGlow {
-  animation: breathePause 5s ease-in-out infinite;
-}
-
-.circleWrapper[data-animate="true"][data-phase="pause-after-exhale"] .circleBackground,
-.circleWrapper[data-animate="true"][data-phase="pause"] .circleBackground {
-  animation: breathePause 5s ease-in-out infinite;
-}
-
-/* ========== INNER WAVE (ripple toward center on exhale) ========== */
-
-.innerWave {
-  fill: none;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.circleWrapper[data-animate="true"][data-phase="exhale"] .innerWave {
-  animation: innerWaveCollapse 4s ease-in infinite;
-}
-
-@keyframes innerWaveCollapse {
-  0% {
-    r: calc(var(--circle-radius, 140px) * 2);
-    opacity: 0;
-    stroke-width: 40;
-  }
-  100% {
-    r: var(--circle-radius, 140px);
-    opacity: 0.2;
-    stroke-width: 0;
-  }
+.circleWrapper[data-animate="true"] .circleBackground {
+  animation: breatheExpand 8s ease-in-out infinite;
 }
 
 /* ========== YIN-YANG IDLE STATE ========== */
 
+/* Static pulsing circles around main circle (idle state) */
+.idlePulseCircle {
+  fill: none;
+  stroke: var(--accent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.circleWrapper[data-animate="false"] .idlePulseCircle {
+  opacity: 1;
+}
+
+.idlePulse1 {
+  animation: idlePulseExpand1 8s ease-out infinite;
+}
+
+.idlePulse3 {
+  animation: idlePulseExpand3 8s ease-out infinite;
+  animation-delay: 4s;
+}
+
+@keyframes idlePulseExpand1 {
+  0% {
+    r: var(--circle-radius, 140px);
+    opacity: 0.1;
+    stroke-width: 80;
+  }
+  100% {
+    r: calc(var(--circle-radius, 140px) * 1.4);
+    opacity: 0;
+    stroke-width: 0;
+  }
+}
+
+@keyframes idlePulseExpand3 {
+  0% {
+    r: var(--circle-radius, 140px);
+    opacity: 0.1;
+    stroke-width: 80;
+  }
+  100% {
+    r: calc(var(--circle-radius, 140px) * 1.4);
+    opacity: 0;
+    stroke-width: 0;
+  }
+}
+
+/* Yin-yang symbol */
 .yinYang {
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -251,7 +205,7 @@
 
 /* Hide progress elements when idle */
 .circleWrapper[data-animate="false"] .circleProgress {
-  opacity: 0.1;
+  opacity: 0;
 }
 
 .circleWrapper[data-animate="false"] .circleGlow {
@@ -319,23 +273,6 @@
 
 .yinYangDot {
   fill: var(--bg-primary);
-}
-
-/* ========== GLOW INTENSITY BY PHASE ========== */
-
-.circleWrapper[data-animate="true"][data-phase="inhale"] .circleGlow {
-  filter: blur(25px);
-  opacity: 1;
-}
-
-.circleWrapper[data-animate="true"][data-phase="exhale"] .circleGlow {
-  filter: blur(18px);
-  opacity: 0.7;
-}
-
-.circleWrapper[data-animate="true"][data-phase="hold"] .circleGlow {
-  filter: blur(15px);
-  opacity: 0.6;
 }
 
 /* Responsive */
