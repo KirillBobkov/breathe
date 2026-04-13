@@ -39,6 +39,10 @@
   --breathing-exhale: #a87a7a;  /* muted dusty rose */
   --breathing-pause: #7aa87a;   /* muted sage */
 
+
+  --yung1: #7a9aa8;
+  --yung2: #465961;
+
   /* Color aliases */
   --color-primary: #7a9e8a;
   --color-text-tertiary: #6b6b6b;
@@ -68,8 +72,8 @@
   --text-muted: #9e9a9f;
 
   /* Accent colors - pastel mint */
-  --accent: #a8d8b9;
-  --accent-hover: #96c9a9;
+  --accent: #90bc9f;
+  --accent-hover: #89b89a;
 
   /* UI colors */
   --border-color: #bab7b2;
@@ -80,10 +84,10 @@
   --overlay: rgba(93, 90, 110, 0.3);
 
   /* Breathing phase colors - pastel tones */
-  --breathing-inhale: #7cbbd5;  /* pastel blue */
-  --breathing-hold: #dfbd88;    /* pastel peach */
+  --breathing-inhale: #64a8c5;  /* pastel blue */
+  --breathing-hold: #c5a879;    /* pastel peach */
   --breathing-exhale: #bc8d8d;  /* pastel pink */
-  --breathing-pause: #acd4ac;   /* pastel green */
+  --breathing-pause: #8cb68c;   /* pastel green */
 
   /* Color aliases */
   --color-primary: #a8d8b9;

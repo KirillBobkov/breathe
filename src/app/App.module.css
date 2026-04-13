@@ -73,7 +73,6 @@
 .layout {
   display: flex;
     flex: 1;
-  overflow: hidden;
 }
 
 /* ==========================================================================
@@ -102,7 +101,6 @@
 
 .main {
   flex: 1;
-  overflow-y: auto;
   padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;

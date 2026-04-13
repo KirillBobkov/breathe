@@ -18,7 +18,7 @@ interface BreathingDisplayProps {
 
 /**
  * BreathingDisplay is the main timer display with circular SVG progress
- * Shows the current phase name and animated progress circle
+ * Shows the current phase name and animated progress circle with zen wave effects
  */
 export function BreathingDisplay({
   phase,
@@ -50,6 +50,7 @@ export function BreathingDisplay({
         color={phaseColor}
         showGlow
         animate={!isPaused}
+        phaseIndex={phaseIndex}
         ariaLabel={`Прогресс дыхания: ${phase?.name || 'Готов'}, ${formatTime(timeRemaining)} осталось`}
       >
         <div className={styles.phaseName} style={{ color: phaseColor }}>
