@@ -203,9 +203,9 @@
   opacity: 0.2;
 }
 
-/* Hide progress elements when idle */
+/* Show solid circle when idle */
 .circleWrapper[data-animate="false"] .circleProgress {
-  opacity: 0;
+  opacity: 1;
 }
 
 .circleWrapper[data-animate="false"] .circleGlow {

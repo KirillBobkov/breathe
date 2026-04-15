@@ -40,7 +40,7 @@
   --breathing-pause: #7aa87a;   /* muted sage */
 
 
-  --yung1: #7a9aa8;
+  --yung1: #78c8cc;
   --yung2: #465961;
 
   /* Color aliases */
@@ -100,4 +100,8 @@
   --focus: #a8d8b9;
   --on-primary: #ffffff;
   --primary-rgb: 168, 216, 185;
+
+  --yung1: #ffffff;
+  --yung2: #77db9a;
+
 }

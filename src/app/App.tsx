@@ -312,8 +312,13 @@ export const App: React.FC = () => {
     const cycles = preset.totalCycles ?? 1;
     const totalSeconds = phaseSeconds * cycles;
 
-    if (totalSeconds >= 60) {
-      const minutes = Math.round(totalSeconds / 60);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    if (minutes > 0 && seconds > 0) {
+      return `${minutes} ${getMinutesForm(minutes)} ${seconds} ${getSecondsForm(seconds)}`;
+    }
+    if (minutes > 0) {
       return `${minutes} ${getMinutesForm(minutes)}`;
     }
     return `${totalSeconds} ${getSecondsForm(totalSeconds)}`;
