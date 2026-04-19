@@ -16,7 +16,7 @@ export function SoundSettings({ soundVolume, onVolumeChange }: SoundSettingsProp
     <div className={styles.container}>
       <div className={styles.header}>
         <h3 className={styles.title}>
-          Звук <span className={styles.volumeValue}>{Math.round(soundVolume * 100)}%</span>
+          Громкость <span className={styles.volumeValue}>{Math.round(soundVolume * 100)}%</span>
         </h3>
       </div>
 

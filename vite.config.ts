@@ -12,7 +12,7 @@ export default defineConfig({
       filename: 'sw.ts',
       includeAssets: ['vite.svg', 'pwa-icons/*.png'],
       manifest: {
-        name: 'Дыхательные практики',
+        name: 'Дыхание',
         short_name: 'Дыхание',
         description: 'Приложение для упражнений на дыхание',
         theme_color: '#1a1a1a',
