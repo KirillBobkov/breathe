@@ -1,3 +1,4 @@
+import { pluralize, CYCLES_FORMS } from "../../shared/utils";
 import styles from "./CycleProgress.module.css";
 
 interface CycleProgressProps {
@@ -38,7 +39,7 @@ export function CycleProgress({
             </>
           )
         ) : full ? (
-          <>{totalCycles} циклов</>
+          <>{totalCycles} {pluralize(totalCycles, CYCLES_FORMS)}</>
         ) : (
           <>
             Цикл {currentCycle} / {totalCycles}

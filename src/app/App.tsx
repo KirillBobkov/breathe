@@ -10,7 +10,7 @@ import {
 } from '../features/breathing-executor';
 import { PresetList, PresetEditor } from '../features/preset-management';
 import { PwaBanner, usePWAUpdate } from '../features/pwa';
-import { ThemeToggle, CircularProgress, Icon, ButtonWithIcon, IconButton, Modal } from '../components/ui';
+import { ThemeToggle, CircularProgress, Icon, ButtonWithIcon, IconButton, Modal, CountdownTimer } from '../components/ui';
 import { DriftCorrectedTimer } from '../shared/timer';
 import { AudioPlayer } from '../shared/audio';
 import type { Preset, PresetCreateInput } from '../entities/preset/preset.types';
@@ -60,6 +60,7 @@ export const App: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSoundModalOpen, setIsSoundModalOpen] = useState(false);
   const [isMobileScreen, setIsMobileScreen] = useState(false);
+  const [showCountdown, setShowCountdown] = useState(false);
 
   // Detect mobile screen width for PWA banners
   useEffect(() => {
@@ -231,6 +232,12 @@ export const App: React.FC = () => {
     start();
   }, [start]);
 
+  const handleStartWithCountdown = useCallback(() => {
+    // Initialize AudioContext on user interaction (required for mobile browsers)
+    audioPlayerRef.current?.init();
+    setShowCountdown(true);
+  }, []);
+
   const handlePause = useCallback(() => {
     pause();
   }, [pause]);
@@ -390,6 +397,41 @@ export const App: React.FC = () => {
 
         {/* Main Content Area */}
         <main className={styles.main}>
+          {/* Countdown Timer - показывается вместо основного экрана */}
+          {showCountdown ? (
+            <div className={styles.exerciseContainer}>
+              <CountdownTimer
+                initialSeconds={3}
+                color="#5e5e5e"
+                onComplete={() => {
+                  setShowCountdown(false);
+                  start(); // Запуск дыхательного упражнения
+                }}
+              />
+              {/* Phase Indicator и Cycle Progress - остаются видимыми */}
+              {activePreset && (
+                <div className={styles.indicators}>
+                  <PhaseIndicator
+                    phases={activePreset.phases}
+                    currentPhaseIndex={-1}
+                  />
+                  {activePreset.totalCycles ? (
+                    <CycleProgress
+                      currentCycle={activePreset.totalCycles}
+                      totalCycles={activePreset.totalCycles}
+                      full
+                    />
+                  ) : (
+                    <div className={styles.infiniteCycles}>
+                      <span className={styles.infinityLabel}>Бесконечные циклы </span>
+                      <span className={styles.infinity} aria-label="бесконечные циклы"> ∞</span>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
           {/* READY State - Show preset info with start button */}
           {appState === 'READY' && activePreset && (
             <div className={styles.exerciseContainer}>
@@ -397,6 +439,7 @@ export const App: React.FC = () => {
               <div className={styles.programDisplay}>
                 <CircularProgress
                   progress={1}
+                  animateProgress={false}
                   color="var(--accent)"
                   ariaLabel={`Программа: ${activePreset.name}`}
                   showGlow
@@ -443,7 +486,7 @@ export const App: React.FC = () => {
                 <ButtonWithIcon
                   icon="play"
                   className={styles.primaryActionButton}
-                  onClick={handleStart}
+                  onClick={handleStartWithCountdown}
                   aria-label="Начать дыхательное упражнение"
                 >
                   Начать
@@ -494,6 +537,8 @@ export const App: React.FC = () => {
               onRestart={handleRestart}
               onClose={handleCloseSummary}
             />
+          )}
+          </>
           )}
         </main>
       </div>

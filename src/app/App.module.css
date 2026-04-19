@@ -95,6 +95,25 @@
   margin-bottom: var(--spacing-md);
 }
 
+/* CountdownTimer Test Block */
+.countdownTimerTest {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.countdownTimerTitle {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  margin: 0;
+  text-align: center;
+}
+
 /* ==========================================================================
    Main Content
    ========================================================================== */
@@ -340,7 +359,7 @@
   }
 
   .main {
-    padding: 30px 12px 12px;
+    padding: 40px 12px 12px;
   }
 
   .programName {
@@ -415,6 +434,7 @@
 
   .title {
     font-size: var(--font-size-lg);
+    display: none;
   }
 
   .programName {

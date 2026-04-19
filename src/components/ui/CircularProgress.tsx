@@ -9,6 +9,8 @@ export interface CircularProgressProps {
   showGlow?: boolean;
   animate?: boolean;
   phaseIndex?: number; // Used to restart animations on phase change
+  disableCircleAnimation?: boolean; // Отключает зуминг круга и idlePulseCircles
+  animateProgress?: boolean; // Если false - круг всегда полный (нет анимации отсчёта)
   children?: React.ReactNode;
   ariaLabel?: string;
 }
@@ -21,6 +23,8 @@ export function CircularProgress({
   showGlow = false,
   animate = false,
   phaseIndex = 0,
+  disableCircleAnimation = false,
+  animateProgress = true,
   children,
   ariaLabel,
 }: CircularProgressProps) {
@@ -29,7 +33,10 @@ export function CircularProgress({
   const circumference = 2 * Math.PI * radius;
   const effectiveCircumference = circumference - strokeWidth;
   const dashArray = effectiveCircumference;
-  const dashOffset = effectiveCircumference * (1 - progress);
+  // Если animateProgress=false - круг всегда полный (dashOffset=0)
+  const dashOffset = animateProgress ? effectiveCircumference * (1 - progress) : 0;
+  // Если animateProgress=false - квадратные края, иначе круглые
+
 
   const glowCircle = showGlow ? (
     <circle
@@ -40,7 +47,7 @@ export function CircularProgress({
       fill="none"
       stroke={color}
       strokeWidth={strokeWidth}
-      strokeLinecap="round"
+      strokeLinecap={'round'}
       strokeDasharray={dashArray}
       strokeDashoffset={dashOffset}
     />
@@ -74,7 +81,7 @@ export function CircularProgress({
   ) : null;
 
   // Static pulsing circles around main circle (idle state)
-  const idlePulseCircles = !animate ? (
+  const idlePulseCircles = !animate && !disableCircleAnimation ? (
     <>
       <circle
         className={`${styles.idlePulseCircle} ${styles.idlePulse1}`}
@@ -110,6 +117,7 @@ export function CircularProgress({
         className={styles.circleWrapper}
         style={circleWrapperStyle}
         data-animate={animate}
+        data-disable-circle-animation={disableCircleAnimation}
       >
         <svg
           className={styles.svg}
@@ -143,7 +151,7 @@ export function CircularProgress({
             fill="none"
             stroke={color}
             strokeWidth={strokeWidth}
-            strokeLinecap="round"
+            strokeLinecap={animateProgress ? 'round' : 'square'}
             strokeDasharray={dashArray}
             strokeDashoffset={dashOffset}
           />
@@ -151,7 +159,8 @@ export function CircularProgress({
           {/* Glow effect */}
           {glowCircle}
 
-          {/* Yin-Yang symbol (idle state) */}
+          {/* Yin-Yang symbol (idle state) - не показываем при disableCircleAnimation */}
+          {!disableCircleAnimation && (
           <g className={`${styles.yinYang} ${styles.yinYangGroup}`}>
             <defs>
               {/* Clip for left half (yang) */}
@@ -164,22 +173,22 @@ export function CircularProgress({
               </clipPath>
             </defs>
 
-            {/* Main yang circle (left side) - clipped to left half */}
+            {/* Main yang circle (right side) - clipped to right half */}
             <circle
               cx={center}
               cy={center}
               r={radius * 0.85}
               className={styles.yinYangYang}
-              clipPath="url(#yyClipLeft)"
+              clipPath="url(#yyClipRight)"
             />
 
-            {/* Main yin circle (right side) - clipped to right half */}
+            {/* Main yin circle (left side) - clipped to left half */}
             <circle
               cx={center}
               cy={center}
               r={radius * 0.85}
               className={styles.yinYangYin}
-              clipPath="url(#yyClipRight)"
+              clipPath="url(#yyClipLeft)"
             />
 
             {/* Small yang circle at bottom - creates yang's head */}
@@ -199,6 +208,7 @@ export function CircularProgress({
             />
 
           </g>
+          )}
         </svg>
         {centerContent}
       </div>

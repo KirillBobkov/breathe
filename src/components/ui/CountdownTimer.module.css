@@ -1,0 +1,42 @@
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-bottom: var(--spacing-xl);
+}
+
+/* ========== Цифровой дисплей ========== */
+
+.displayValue {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  animation: digitZoom 0.5s ease-out;
+}
+
+/* Анимация зума при появлении/смене цифры */
+@keyframes digitZoom {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ========== Адаптив ========== */
+
+@media (max-width: 480px) {
+  .displayValue {
+    font-size: var(--font-size-3xl);
+  }
+}

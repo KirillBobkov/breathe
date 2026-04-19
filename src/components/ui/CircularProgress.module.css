@@ -41,7 +41,7 @@
 .centerContent {
   width: 80%;
   position: absolute;
-  top: 55%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -127,7 +127,7 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.20);
+    transform: scale(1.15);
   }
 }
 
@@ -142,6 +142,13 @@
 
 .circleWrapper[data-animate="true"] .circleBackground {
   animation: breatheExpand 8s ease-in-out infinite;
+}
+
+/* Отключаем breatheExpand при disableCircleAnimation */
+.circleWrapper[data-disable-circle-animation="true"] .circleProgress,
+.circleWrapper[data-disable-circle-animation="true"] .circleGlow,
+.circleWrapper[data-disable-circle-animation="true"] .circleBackground {
+  animation: none !important;
 }
 
 /* ========== YIN-YANG IDLE STATE ========== */

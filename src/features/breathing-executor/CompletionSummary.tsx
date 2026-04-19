@@ -1,6 +1,6 @@
-import { formatDuration } from '../../shared/utils/time';
-import { Icon, ButtonWithIcon } from '../../components/ui';
-import styles from './CompletionSummary.module.css';
+import { Icon, ButtonWithIcon, IconButton } from "../../components/ui";
+import { formatDuration } from "../../shared/utils";
+import styles from "./CompletionSummary.module.css";
 
 interface CompletionSummaryProps {
   /** Total time of the exercise in milliseconds */
@@ -22,7 +22,11 @@ export function CompletionSummary({
 }: CompletionSummaryProps) {
   return (
     <div className={styles.container}>
-      <div className={styles.summary} role="dialog" aria-labelledby="completion-title">
+      <div
+        className={styles.summary}
+        role="dialog"
+        aria-labelledby="completion-title"
+      >
         <div className={styles.iconWrapper}>
           <Icon name="check" className={styles.icon} />
         </div>
@@ -33,29 +37,28 @@ export function CompletionSummary({
 
         <div className={styles.stats}>
           <div className={styles.stat}>
-          </div>
-          <div className={styles.stat}>
-            <span className={styles.statValue}>{formatDuration(totalTime)}</span>
             <span className={styles.statLabel}>Общее время</span>
+            <span className={styles.statValue}>
+              {formatDuration(totalTime, 'full')}
+            </span>
           </div>
         </div>
-        <div className={styles.actions}>
-          <ButtonWithIcon
-            icon="restart"
-            variant="primary"
-            size="medium"
-            className={styles.button}
-            onClick={onRestart}
-          >
-            Заново
-          </ButtonWithIcon>
 
+        {/* Action Buttons - как на главном экране */}
+        <div className={styles.actionButtons}>
+          <IconButton
+            icon={<Icon name="restart" />}
+            variant="secondary"
+            size="large"
+            onClick={onRestart}
+            aria-label="Заново"
+            className={styles.iconActionButton}
+          />
           <ButtonWithIcon
             icon="close"
-            variant="secondary"
-            size="medium"
-            className={styles.button}
+            className={styles.primaryActionButton}
             onClick={onClose}
+            aria-label="Закрыть"
           >
             Закрыть
           </ButtonWithIcon>
