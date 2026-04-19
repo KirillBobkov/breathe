@@ -75,13 +75,13 @@ export const usePWAUpdate = (): PWAUpdateState & {
           const newWorker = registration.installing
           if (!newWorker) return
 
-          console.log('[PWA] 🆕 Update found, installing...')
+          console.log('[PWA] 🆕 Update found, installing...');
 
           newWorker.addEventListener('statechange', () => {
-            console.log('[PWA] SW state changed:', newWorker.state)
+            console.log('[PWA] SW state changed:', newWorker.state);
             if (newWorker.state === 'installed' && registration.active) {
-              console.log('[PWA] ✅ New SW installed and waiting')
-              showUpdateBanner()
+              console.log('[PWA] ✅ New SW installed and waiting');
+              showUpdateBanner();
             }
           })
         })
